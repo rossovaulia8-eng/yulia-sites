@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юлия Россова — сайты для малого бизнеса</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23EFEAE1'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='52' text-anchor='middle' fill='%236B6A4F'%3EЮ%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Юлия Россова — лендинги, формы заявок и Telegram-интеграции для малого и среднего бизнеса. Быстро, современно, по делу.">
+<style>
+  :root {
+    --ink: #1E1B16;
+    --ink-soft: rgba(30,27,22,0.7);
+    --ink-faint: rgba(30,27,22,0.5);
+    --paper: #F1ECE3;
+    --paper-2: #E7E0D2;
+    --paper-3: #DCD3BF;
+    --olive: #2C4455;
+    --olive-dark: #223642;
+    --gold: #7FA8C4;
+    --cream-on-dark: #F1ECE3;
+    --line: rgba(30,27,22,0.14);
+    --line-on-dark: rgba(241,236,227,0.18);
+    --font-serif: Georgia, "Times New Roman", "PT Serif", ui-serif, serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; margin: 0; }
+  p { margin: 0 0 1em; }
+  a { color: inherit; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: clamp(56px, 9vw, 116px) 0; }
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    color: var(--olive);
+    margin-bottom: 1.2em;
+  }
+  .lede { font-size: 1.05rem; max-width: 560px; color: var(--ink-soft); }
+  .section-title { font-size: clamp(1.5rem, 3vw, 2.1rem); max-width: 720px; line-height: 1.3; font-weight: 400; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    letter-spacing: 0.03em;
+    padding: 15px 32px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+  }
+  .btn--solid { background: var(--olive); border-color: var(--olive); color: var(--cream-on-dark); }
+  .btn--solid:hover { background: var(--olive-dark); border-color: var(--olive-dark); }
+  .btn--on-dark { color: var(--cream-on-dark); }
+  .btn--on-dark:hover { background: rgba(241,236,227,0.12); }
+  .btn--on-light { color: var(--ink); }
+  .btn--on-light:hover { background: rgba(30,27,22,0.06); }
+  .btn:active { transform: scale(0.98); }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(241,236,227,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--olive); }
+  .nav-links { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; font-size: 0.92rem; }
+  .nav-links a { text-decoration: none; opacity: 0.8; transition: opacity 0.2s ease; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); margin: 5px 0; }
+  @media (max-width: 780px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+  }
+
+  /* Hero */
+  .hero { padding-top: clamp(48px, 8vw, 88px); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: stretch;
+  }
+  .hero-head {
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+  .hero-head em { font-style: italic; color: var(--olive); }
+  .hero-sub {
+    max-width: 480px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-photo-wrap { display: flex; justify-content: center; height: 100%; }
+  .hero-photo-frame {
+    width: 100%;
+    max-width: 380px;
+    height: 100%;
+    overflow: hidden;
+    background: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    filter: grayscale(1) contrast(1.03);
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-photo-wrap { margin-top: 28px; height: auto; }
+    .hero-photo-frame { max-width: 280px; height: auto; aspect-ratio: 3 / 4; }
+  }
+
+  /* Intro */
+  .intro {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .intro-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--paper-3);
+  }
+  .intro-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; filter: grayscale(1); }
+  .intro-text p { font-size: 1.35rem; line-height: 1.5; font-family: var(--font-serif); color: var(--ink); }
+  .intro-text .note {
+    margin-top: 28px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 460px;
+  }
+  @media (max-width: 780px) {
+    .intro { grid-template-columns: 1fr; gap: 28px; }
+    .intro-text { order: 1; }
+    .intro-photo { order: 2; width: 200px; height: 200px; }
+  }
+
+  /* Services */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 44px;
+  }
+  .service { background: var(--paper); padding: 38px 36px; transition: background 0.25s ease; }
+  .service:hover { background: var(--paper-2); }
+  .service .num { font-family: var(--font-serif); font-size: 0.85rem; color: var(--olive); letter-spacing: 0.08em; margin-bottom: 20px; display: block; }
+  .service h3 { font-size: 1.25rem; margin-bottom: 12px; }
+  .service p { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+  @media (max-width: 760px) {
+    .services { grid-template-columns: 1fr; }
+  }
+
+  /* Portfolio cases */
+  .cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 44px; }
+  .case {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--ink);
+    display: block;
+    aspect-ratio: 5 / 4;
+    transition: transform 0.35s cubic-bezier(.2,.7,.3,1);
+  }
+  .case:hover { transform: translateY(-6px); }
+  .case img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(1) brightness(0.82);
+    transition: filter 0.5s ease, transform 0.6s cubic-bezier(.2,.7,.3,1);
+  }
+  .case:hover img { filter: grayscale(0) brightness(0.7); transform: scale(1.05); }
+  .case.jetcore { transition: background 0.4s ease, transform 0.35s cubic-bezier(.2,.7,.3,1); }
+  .case.jetcore:hover { background: linear-gradient(155deg, #101b31 0%, #1a2946 55%, #101b31 100%); }
+  .case.jetcore img { object-fit: contain; width: 56%; height: 56%; margin: auto; filter: none; transition: filter 0.4s ease; }
+  .case.jetcore:hover img { filter: drop-shadow(0 0 20px rgba(228,0,0,0.55)) invert(1); transform: none; }
+  .case.jetcore::after {
+    content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%;
+    background: #E40000; opacity: 0; transition: opacity 0.3s ease;
+  }
+  .case.jetcore:hover::after { opacity: 1; }
+  .case-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(9,8,6,0.92) 100%); }
+  .case-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px; z-index: 2; }
+  .case-kicker { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); font-weight: 600; margin-bottom: 8px; display: block; }
+  .case h3 { color: var(--cream-on-dark); font-size: 1.4rem; margin-bottom: 6px; }
+  .case p { color: rgba(241,236,227,0.72); font-size: 0.88rem; max-width: 320px; margin: 0; }
+  .case-arrow {
+    position: absolute; top: 20px; right: 20px; z-index: 2;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(30,27,22,0.4);
+    border: 1px solid rgba(241,236,227,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cream-on-dark);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .case:hover .case-arrow { background: var(--olive); transform: rotate(45deg); }
+  @media (max-width: 760px) {
+    .cases { grid-template-columns: 1fr; }
+    .case { aspect-ratio: 4 / 3; }
+  }
+
+  /* Process */
+  .process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 44px; }
+  .step { padding-top: 28px; border-top: 1px solid var(--line); }
+  .step .step-num {
+    font-family: var(--font-serif); font-size: 2.1rem;
+    color: transparent; -webkit-text-stroke: 1px var(--olive);
+    display: block; margin-bottom: 18px;
+  }
+  .step h3 { font-size: 1.1rem; margin-bottom: 10px; }
+  .step p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+  @media (max-width: 900px) {
+    .process { grid-template-columns: 1fr 1fr; row-gap: 36px; }
+  }
+  @media (max-width: 560px) {
+    .process { grid-template-columns: 1fr; }
+  }
+
+  /* Dark CTA / stats */
+  .dark-section { background: var(--olive); color: var(--cream-on-dark); }
+  .dark-section .eyebrow { color: var(--gold); }
+  .dark-section h2 { font-size: clamp(2rem, 5vw, 3.2rem); max-width: 680px; margin-bottom: 0.3em; }
+  .dark-section .lede { color: rgba(241,236,227,0.72); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line-on-dark);
+  }
+  .stat .num { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+  .stat .label { font-size: 0.82rem; color: rgba(241,236,227,0.65); margin-top: 6px; }
+  @media (max-width: 780px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .dark-cta { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line-on-dark); }
+  .dark-cta p { color: rgba(241,236,227,0.7); max-width: 460px; }
+
+  /* Footer */
+  footer { background: #2C4455; color: var(--cream-on-dark); padding: 44px 0; }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: center; }
+  .footer-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font-size: 0.88rem; }
+  .footer-links a { text-decoration: none; opacity: 0.8; }
+  .footer-links a:hover { opacity: 1; }
+  .footer-copy { font-size: 0.8rem; color: rgba(241,236,227,0.6); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo">Юлия <span>Россова</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#services">услуги</a></li>
+        <li><a href="#work">портфолио</a></li>
+        <li><a href="#process">как работаю</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--on-light" href="https://t.me/rosskurnos" target="_blank" rel="noopener" style="padding:10px 22px; font-size:0.85rem;">Telegram</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">сайты для малого и среднего бизнеса</span>
+        <h1 class="hero-head">Сайт, который<br>ставит <em>задачу</em>,<br>а не просто висит в интернете</h1>
+        <p class="hero-sub">Делаю лендинги, брендированные под айдентику компании — с формами заявок и Telegram-интеграциями — для бизнеса от студий и ресторанов до сложных B2B-услуг. Без агентского долгостроя: сайт собирается быстро и работает на конкретный результат — заявки, брони, обращения.</p>
+        <div class="hero-actions">
+          <a class="btn btn--solid" href="https://t.me/rosskurnos" target="_blank" rel="noopener">Обсудить проект</a>
+          <a class="btn btn--on-light" href="#work">Смотреть работы</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img src="assets/yulia-portrait.jpg" alt="Юлия Россова">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section" id="about">
+    <div class="container intro">
+      <div class="intro-photo">
+        <img src="assets/yulia-hero-2.jpg" alt="Юлия Россова — портрет">
+      </div>
+      <div class="intro-text">
+        <p>Сайт вроде есть, а заявок нет — потому что чаще всего это визитка, а не инструмент, заточенный под одно конкретное действие клиента.</p>
+        <p class="note">Я делаю лендинги для малого и среднего бизнеса: студий, ресторанов, сервисов. Без брифов на десять страниц и месяцев согласований — от разговора о задаче до рабочего сайта с формой заявки и Telegram-уведомлениями проходит несколько дней.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <span class="eyebrow">что делаю</span>
+      <h2 class="section-title">Пять вещей, за которыми ко мне чаще всего приходят — от первого лендинга до сайта, который сам собирает заявки</h2>
+      <div class="services">
+        <div class="service">
+          <span class="num">01</span>
+          <h3>Лендинги под задачу</h3>
+          <p>Одностраничный сайт, заточенный под одно действие клиента — записаться, позвонить, оставить заявку. Без лишних разделов, которые никто не читает.</p>
+        </div>
+        <div class="service">
+          <span class="num">02</span>
+          <h3>Формы заявок</h3>
+          <p>Короткие формы с минимумом полей — чем меньше нужно заполнить, тем больше людей доходят до конца и правда оставляют заявку.</p>
+        </div>
+        <div class="service">
+          <span class="num">03</span>
+          <h3>Интеграция с Telegram</h3>
+          <p>Заявки с сайта приходят прямо в чат или бота — не нужно проверять почту или отдельную CRM, чтобы не пропустить клиента.</p>
+        </div>
+        <div class="service">
+          <span class="num">04</span>
+          <h3>Чат-боты</h3>
+          <p>Бот отвечает на частые вопросы и собирает контакты, пока вы заняты делом, а не телефоном.</p>
+        </div>
+        <div class="service">
+          <span class="num">05</span>
+          <h3>Связка с CRM</h3>
+          <p>Настраиваю передачу заявок туда, где вы уже ведёте клиентов — чтобы не переносить их вручную из одного места в другое.</p>
+        </div>
+        <div class="service">
+          <span class="num">06</span>
+          <h3>Адаптивная вёрстка</h3>
+          <p>Каждый сайт проверяется на телефоне так же внимательно, как на компьютере — большинство ваших клиентов зайдут именно с телефона.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section" id="work">
+    <div class="container">
+      <span class="eyebrow">портфолио</span>
+      <h2 class="section-title">Четыре проекта из разных ниш — ресторан, студия практик и B2B-сервис</h2>
+      <div class="cases">
+
+        <a class="case" href="../mr-miyagi/index.html" target="_blank" rel="noopener">
+          <img src="assets/mr-miyagi.jpg" alt="MR. MIYAGI — японская фьюжн-кухня">
+          <div class="case-shade"></div>
+          <div class="case-arrow">↗</div>
+          <div class="case-body">
+            <span class="case-kicker">Ресторан · Фьюжн-кухня</span>
+            <h3>MR. MIYAGI</h3>
+            <p>Лендинг для японской фьюжн-кухни с акцентом на атмосферу и бронирование столика.</p>
+          </div>
+        </a>
+
+        <a class="case" href="../pech/index.html" target="_blank" rel="noopener">
+          <img src="assets/pech.jpg" alt="ПЕЧЬ — русская фьюжн-кухня">
+          <div class="case-shade"></div>
+          <div class="case-arrow">↗</div>
+          <div class="case-body">
+            <span class="case-kicker">Ресторан · Русская кухня</span>
+            <h3>ПЕЧЬ</h3>
+            <p>Сайт ресторана на дровяном огне — тёмная, «вкусная» подача меню и истории кухни.</p>
+          </div>
+        </a>
+
+        <a class="case" href="../body-and-mind/index.html" target="_blank" rel="noopener">
+          <img src="assets/body-and-mind.jpg" alt="body & mind — студия телесных практик">
+          <div class="case-shade"></div>
+          <div class="case-arrow">↗</div>
+          <div class="case-body">
+            <span class="case-kicker">Студия · Телесные практики</span>
+            <h3>body &amp; mind</h3>
+            <p>Спокойный, воздушный лендинг для студии дыхательных и телесных практик.</p>
+          </div>
+        </a>
+
+        <a class="case jetcore" href="../jetcore/netlify-deploy/index.html" target="_blank" rel="noopener">
+          <img src="assets/jetcore-logo.png" alt="JETCORE — банковские гарантии">
+          <div class="case-shade"></div>
+          <div class="case-arrow">↗</div>
+          <div class="case-body">
+            <span class="case-kicker">B2B · Финансовые услуги</span>
+            <h3>JETCORE</h3>
+            <p>Строгий корпоративный сайт по банковским гарантиям для тендеров и контрактов.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="container">
+      <span class="eyebrow">как работаю</span>
+      <h2 class="section-title">Цикл от идеи до рабочего сайта занимает дни, не кварталы</h2>
+      <div class="process">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3>Обращение и договор</h3>
+          <p>Обсуждаем задачу и условия работы, подписываем договор — фиксируем сроки и стоимость.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3>Бриф и сборка сайта</h3>
+          <p>Присылаете тексты, фото, логотип и фирменные цвета по брифу — собираю сайт, брендированный под айдентику вашей компании, а не по шаблону.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3>Правки</h3>
+          <p>Показываю готовый вариант и вношу правки по замечаниям, пока не устроит.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <h3>Публикация</h3>
+          <p>Публикуем сайт и проверяем формы и интеграции вживую.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DARK CTA / STATS -->
+  <section class="dark-section">
+    <div class="container section">
+      <span class="eyebrow">вложение в ваш бизнес</span>
+      <h2>Расскажите, какой сайт нужен вашему бизнесу</h2>
+      <p class="lede">Опишите задачу в Telegram — отвечу в течение дня и предложу, с чего начать.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="num">4</div><div class="label">проекта в портфолио</div></div>
+        <div class="stat"><div class="num">1</div><div class="label">сайт подключён к Telegram-боту</div></div>
+        <div class="stat"><div class="num">дни</div><div class="label">а не месяцы — на сборку сайта</div></div>
+        <div class="stat"><div class="num">0</div><div class="label">агентского долгостроя</div></div>
+      </div>
+
+      <div class="dark-cta">
+        <a class="btn btn--on-dark" href="https://t.me/rosskurnos" target="_blank" rel="noopener">Написать @rosskurnos →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="logo">Юлия <span style="color:var(--gold);">Россова</span></div>
+    <ul class="footer-links">
+      <li><a href="#services">услуги</a></li>
+      <li><a href="#work">портфолио</a></li>
+      <li><a href="#process">как работаю</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Юлия Россова</div>
+  </div>
+</footer>
+
+</body>
+</html>

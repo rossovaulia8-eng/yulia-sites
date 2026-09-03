@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JETCORE</title>
+<meta name="description" content="Банковские гарантии на участие в тендере и исполнение контрактов по 44-ФЗ, 223-ФЗ и коммерческим сделкам — условия фиксируются в договоре до подачи документов.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0A1120;
+    --paper-2:#121C30;
+    --text:#D0C7B9;
+    --text-muted:#D0C7B9;
+    --line:#26314A;
+    --accent:#E40000;
+    --accent-strong:#E40000;
+    --on-accent:#DAD0C0;
+    --navy:#101B31;
+    --on-navy:#D0C7B9;
+    --on-navy-muted:#D0C7B9;
+    --navy-line:#2A3550;
+    --radius:2px;
+    --font-display:'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-body:'IBM Plex Sans', 'Segoe UI', sans-serif;
+    --font-mono:'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding-inline:clamp(1.25rem, 4vw, 2.5rem);
+  }
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--accent-strong); color:var(--on-accent);
+    padding:.75rem 1rem; font-family:var(--font-mono); font-size:.85rem;
+    z-index:200; border-radius:var(--radius);
+  }
+  .skip-link:focus{ left:1rem; top:1rem; }
+  :focus-visible{ outline:2px solid var(--accent-strong); outline-offset:3px; }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.75rem;
+    font-weight:500;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 .75rem;
+  }
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:.005em;
+    margin:0;
+    text-wrap:balance;
+  }
+  p{ margin:0; }
+  .lede{ color:var(--text-muted); max-width:62ch; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-family:var(--font-body); font-weight:600; font-size:.95rem;
+    padding:.85rem 1.5rem;
+    border-radius:var(--radius);
+    border:1px solid transparent;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{
+    background:var(--accent-strong); color:var(--on-accent);
+  }
+  .btn-primary:hover{ box-shadow:0 6px 20px -6px rgba(201,46,30,.55); }
+  .btn-ghost{
+    background:transparent; color:var(--text); border-color:var(--line);
+  }
+  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-on-navy{ background:var(--accent-strong); color:var(--on-accent); }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header .logo{ color:#101B31; }
+  header nav.nav-links a{ color:#48536C; }
+  header nav.nav-links a:hover{ color:var(--accent); }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:1rem;
+  }
+  .logo{
+    display:flex; align-items:center; gap:.65rem;
+    text-decoration:none; color:var(--text);
+  }
+  .logo-mark{ height:30px; width:auto; flex:none; }
+  .logo-divider{ width:1px; height:24px; background:currentColor; opacity:.25; flex:none; }
+  .logo-text{ display:flex; flex-direction:column; line-height:1.15; }
+  .logo-title{ font-family:var(--font-display); font-weight:700; font-size:1.3rem; letter-spacing:.03em; }
+  .logo-tagline{ font-family:var(--font-body); font-weight:500; font-size:.6rem; letter-spacing:.01em; opacity:.65; margin-top:.05rem; white-space:nowrap; }
+  nav.nav-links{ display:flex; gap:2rem; }
+  nav.nav-links a{
+    text-decoration:none; font-size:.9rem; font-weight:500; color:var(--text-muted);
+    transition:color .15s ease;
+  }
+  nav.nav-links a:hover{ color:var(--accent); }
+  .header-actions{ display:flex; align-items:center; gap:1.75rem; }
+  @media (max-width:760px){
+    nav.nav-links{ display:none; }
+    header .btn-primary{ padding:.55rem .9rem; font-size:.8rem; }
+  }
+
+  /* Hero */
+  .hero{
+    position:relative;
+    padding-block:clamp(3rem, 7vw, 6rem) clamp(3.5rem, 8vw, 6rem);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 64px);
+    opacity:.35;
+    mask-image:linear-gradient(180deg, black, transparent 85%);
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(2rem,5vw,4rem);
+    align-items:center;
+  }
+  @media (max-width:900px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .scope-chips{ justify-content:center; }
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw + 1rem, 3.9rem);
+    margin-bottom:1.25rem;
+  }
+  .hero .lede{ font-size:1.08rem; margin-bottom:1.75rem; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1.75rem; }
+  .scope-chips{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .chip{
+    font-family:var(--font-mono); font-size:.75rem; letter-spacing:.04em;
+    border:1px solid var(--line); border-radius:100px;
+    padding:.4rem .85rem; color:var(--text-muted);
+  }
+
+  /* term sheet card */
+  .term-card{
+    position:relative;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.75rem;
+  }
+  .term-card::before,.term-card::after,
+  .term-card .tick-br, .term-card .tick-bl{
+    content:""; position:absolute; width:14px; height:14px;
+    border-color:var(--accent); border-style:solid; opacity:.9;
+  }
+  .term-card::before{ top:-1px; left:-1px; border-width:2px 0 0 2px; }
+  .term-card::after{ top:-1px; right:-1px; border-width:2px 2px 0 0; }
+  .term-card .tick-bl{ bottom:-1px; left:-1px; border-width:0 0 2px 2px; }
+  .term-card .tick-br{ bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+  .term-card-header{
+    display:flex; justify-content:space-between; align-items:baseline;
+    border-bottom:1px solid var(--line); padding-bottom:1rem; margin-bottom:1rem;
+  }
+  .term-card-header .eyebrow{ margin:0; }
+  .term-card-header .doc-id{ font-family:var(--font-mono); font-size:.7rem; color:var(--text-muted); }
+  .term-row{
+    display:flex; gap:.75rem; align-items:flex-start;
+    padding-block:.7rem;
+    border-bottom:1px dashed var(--line);
+    font-size:.92rem;
+  }
+  .term-row:last-of-type{ border-bottom:none; }
+  .term-row svg{ flex:none; width:18px; height:18px; margin-top:.15rem; color:var(--accent); }
+  .term-card-note{
+    margin-top:1rem; font-size:.8rem; color:var(--text-muted); font-style:normal;
+  }
+
+  section{ padding-block:clamp(3rem, 6vw, 5.5rem); }
+  .section-head{ max-width:70ch; margin-bottom:2.5rem; }
+  .section-head h2{ font-size:clamp(1.7rem, 2.4vw + 1rem, 2.35rem); margin-bottom:.9rem; }
+
+  /* About */
+  .about{ background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns:1fr; gap:2rem; }
+  .compare-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.75rem; }
+  @media (max-width:700px){ .compare-row{ grid-template-columns:1fr; } }
+  .compare-tag{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:1rem 1.1rem; background:var(--paper);
+  }
+  .compare-tag .bank{ font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; color:var(--accent); text-transform:uppercase; margin-bottom:.4rem; }
+  .compare-tag p{ font-size:.9rem; color:var(--text); }
+
+  /* Services */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem;
+  }
+  @media (max-width:760px){ .services-grid{ grid-template-columns:1fr; } }
+  .service-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.75rem;
+    display:flex; flex-direction:column; gap:1rem;
+    background:var(--paper);
+  }
+  .service-card h3{ font-family:var(--font-body); font-size:1.15rem; font-weight:700; }
+  .service-card p.desc{ color:var(--text-muted); font-size:.92rem; }
+  .service-foot{
+    margin-top:auto; padding-top:1rem; border-top:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem;
+  }
+  .price{ font-family:var(--font-mono); font-size:.95rem; }
+  .price .from{ color:var(--text-muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; margin-right:.35rem; }
+  .service-cta{
+    font-family:var(--font-body); font-weight:600; font-size:.88rem;
+    text-decoration:none; color:var(--accent);
+    background:none; border:none; cursor:pointer; padding:0;
+  }
+  .service-cta:hover{ text-decoration:underline; }
+
+  /* Process (navy) */
+  .process{ background:var(--navy); color:var(--on-navy); }
+  .process .eyebrow{ color:var(--accent); }
+  .process .section-head p{ color:var(--on-navy-muted); }
+  .process-steps{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;
+    position:relative;
+  }
+  @media (max-width:900px){ .process-steps{ grid-template-columns:1fr; gap:2rem; } }
+  .step{ position:relative; padding-top:1.25rem; }
+  .step::before{
+    content:""; position:absolute; top:0; left:0; width:100%; height:2px;
+    background:var(--navy-line);
+  }
+  .step::after{
+    content:""; position:absolute; top:-4px; left:0; width:10px; height:10px;
+    border-radius:50%; background:var(--accent);
+  }
+  .step-num{ font-family:var(--font-mono); font-size:.78rem; color:var(--accent); margin-bottom:.6rem; }
+  .step h3{ font-family:var(--font-body); font-size:1.05rem; font-weight:700; margin-bottom:.5rem; color:var(--on-navy); }
+  .step p{ color:var(--on-navy-muted); font-size:.9rem; }
+
+  /* FAQ */
+  .faq-list{ max-width:76ch; }
+  .faq-item{
+    border-bottom:1px solid var(--line);
+    padding-block:1.1rem;
+  }
+  .faq-item summary{
+    cursor:pointer; list-style:none;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    font-family:var(--font-body); font-weight:600; font-size:1rem;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content:"+"; font-family:var(--font-mono); font-size:1.2rem; color:var(--accent);
+    flex:none; transition:transform .15s ease;
+  }
+  .faq-item[open] summary::after{ content:"−"; }
+  .faq-item p{ color:var(--text-muted); margin-top:.85rem; font-size:.92rem; max-width:66ch; }
+
+  /* Lead form */
+  .lead{ background:var(--paper-2); border-top:1px solid var(--line); }
+  .lead-inner{
+    max-width:760px; margin:0 auto;
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:clamp(1.75rem,4vw,3rem);
+  }
+  .lead-head{ margin-bottom:2rem; }
+  .lead-head h2{ font-size:clamp(1.6rem,2vw + 1rem,2.1rem); margin-bottom:.6rem; }
+  form#request-form{ display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+  @media (max-width:600px){ form#request-form{ grid-template-columns:1fr; } }
+  .field{ display:flex; flex-direction:column; gap:.4rem; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{ font-size:.8rem; font-weight:600; color:var(--text-muted); }
+  .field label .req{ color:var(--accent); }
+  .field input, .field select, .field textarea{
+    font-family:var(--font-body); font-size:.95rem; color:var(--text);
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:.75rem .85rem; width:100%;
+  }
+  .field textarea{ resize:vertical; min-height:5rem; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--accent-strong); outline-offset:1px; border-color:var(--accent-strong);
+  }
+  .lead-submit{ grid-column:1 / -1; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-top:.5rem; }
+  .form-note{ font-size:.78rem; color:var(--text-muted); }
+  .consent-field{ margin-top:.25rem; }
+  .consent-label{
+    display:flex; align-items:flex-start; gap:.6rem;
+    font-size:.85rem; color:var(--text-muted); cursor:pointer;
+  }
+  .consent-label input{ margin-top:.2rem; width:auto; flex:none; }
+  .consent-label a{ color:var(--accent); text-decoration:underline; }
+  #form-success{
+    text-align:left; padding:1rem 0;
+  }
+  #form-success h3{ font-family:var(--font-body); font-size:1.2rem; margin-bottom:.6rem; }
+  #form-success p{ color:var(--text-muted); }
+  #form-success[hidden]{ display:none; }
+  .form-error{
+    margin-top:1rem; font-size:.88rem; color:var(--accent);
+    border:1px solid var(--accent); border-radius:var(--radius);
+    padding:.75rem 1rem;
+  }
+  .form-error[hidden]{ display:none; }
+
+  /* Footer */
+  footer{ background:var(--navy); color:var(--on-navy); border-top:1px solid var(--navy-line); }
+  .footer-inner{ padding-block:3rem 2rem; }
+  .footer-top{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:2rem;
+    padding-bottom:2.5rem; border-bottom:1px solid var(--navy-line);
+  }
+  @media (max-width:820px){ .footer-top{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .footer-top{ grid-template-columns:1fr; } }
+  .footer-brand .logo{ color:var(--on-navy); margin-bottom:.9rem; }
+  .footer-brand .logo-mark{ filter:invert(1); }
+  .footer-brand p{ color:var(--on-navy-muted); font-size:.9rem; max-width:32ch; }
+  .footer-col h4{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 .9rem; font-weight:500;
+  }
+  .footer-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.55rem; }
+  .footer-col a{ text-decoration:none; color:var(--on-navy-muted); font-size:.9rem; }
+  .footer-col a:hover{ color:var(--on-navy); }
+  .footer-col p{ color:var(--on-navy-muted); font-size:.9rem; }
+  .footer-bottom{
+    padding-top:1.5rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:.75rem;
+    font-size:.8rem; color:var(--on-navy-muted);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#lead-form">Перейти к заявке</a>
+
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="JETCORE — на главную">
+      <img class="logo-mark" src="logo.png" alt="" width="36" height="30">
+      <span class="logo-divider" aria-hidden="true"></span>
+      <span class="logo-text">
+        <span class="logo-title">JETCORE</span>
+        <span class="logo-tagline">для качественных и быстрых решений</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#about">Подход</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary" href="#lead-form">Оставить заявку</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Обеспечение по контрактам</p>
+        <h1>Гарантия на тендер — условия зафиксированы до заявки</h1>
+        <p class="lede">JETCORE подбирает банковскую гарантию под ваш контракт по 44-ФЗ, 223-ФЗ и коммерческим сделкам. Комиссию, срок выпуска и требования банка фиксируем в договоре — до того как вы начнёте собирать документы.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#lead-form">Оставить заявку</a>
+          <a class="btn btn-ghost" href="#services">Смотреть услуги</a>
+        </div>
+        <div class="scope-chips">
+          <span class="chip">44-ФЗ</span>
+          <span class="chip">223-ФЗ</span>
+          <span class="chip">Коммерческие контракты</span>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <span class="tick-bl" aria-hidden="true"></span><span class="tick-br" aria-hidden="true"></span>
+        <div class="term-card-header">
+          <p class="eyebrow">Что фиксируем в договоре</p>
+          <span class="doc-id">JC / TERMS</span>
+        </div>
+        <div class="term-card-body">
+          <div class="term-row">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Комиссия банка — фиксируется в договоре, без доплат по ходу сделки</span>
+          </div>
+          <div class="term-row">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Срок выпуска гарантии — согласован заранее, не «плавает»</span>
+          </div>
+          <div class="term-row">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Требования к пакету документов — присылаем полным списком сразу</span>
+          </div>
+          <div class="term-row">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Банк-гарант — видите, с каким банком работаете, до подписания</span>
+          </div>
+        </div>
+        <p class="term-card-note">Точные цифры по вашему контракту — после заявки.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div>
+        <p class="eyebrow">Подход</p>
+        <h2>Один банк не подходит всем заявкам</h2>
+        <p class="lede">Мы не отправляем вашу заявку в один банк «по умолчанию». Для каждого случая сравниваем условия нескольких банков-партнёров — с суммой комиссии и сроком выпуска по каждому — и показываем расчёт вам, а не только тот вариант, который выгоднее нам. Дальше вы выбираете сами.</p>
+        <div class="compare-row">
+          <div class="compare-tag"><p class="bank">Банк А</p><p>комиссия ниже</p></div>
+          <div class="compare-tag"><p class="bank">Банк Б</p><p>быстрее выпуск</p></div>
+          <div class="compare-tag"><p class="bank">Банк В</p><p>меньше требований к документам</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Что мы оформляем</p>
+        <h2>Услуги</h2>
+        <p class="lede">Все виды обеспечения, которые требуются на разных этапах контракта — от подачи заявки до гарантийного периода.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <h3>Гарантия на участие в тендере</h3>
+          <p class="desc">Обеспечение заявки при подаче на конкурс или аукцион по 44-ФЗ и 223-ФЗ — вместо денежного залога.</p>
+          <div class="service-foot">
+            <span class="price"><span class="from">от</span>1 000 ₽</span>
+            <button class="service-cta" type="button" data-service="Участие в тендере">Оставить заявку →</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3>Гарантия исполнения контракта</h3>
+          <p class="desc">Оформляется после победы в тендере: подтверждает заказчику, что обязательства по контракту будут выполнены.</p>
+          <div class="service-foot">
+            <span class="price"><span class="from">от</span>1 000 ₽</span>
+            <button class="service-cta" type="button" data-service="Исполнение контракта">Оставить заявку →</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3>Гарантия возврата аванса</h3>
+          <p class="desc">Нужна, если контракт предполагает авансовый платёж — страхует заказчика на случай его неотработки.</p>
+          <div class="service-foot">
+            <span class="price"><span class="from">от</span>1 000 ₽</span>
+            <button class="service-cta" type="button" data-service="Возврат аванса">Оставить заявку →</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <h3>Гарантия по гарантийным обязательствам</h3>
+          <p class="desc">Действует после сдачи объекта или работ — покрывает период гарантийного обслуживания по контракту.</p>
+          <div class="service-foot">
+            <span class="price"><span class="from">от</span>1 000 ₽</span>
+            <button class="service-cta" type="button" data-service="Гарантийные обязательства">Оставить заявку →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Как проходит оформление</p>
+        <h2>Четыре шага от заявки до гарантии</h2>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <p class="step-num">01</p>
+          <h3>Заявка</h3>
+          <p>Присылаете параметры контракта: сумму, срок, номер закупки или реквизиты заказчика.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">02</p>
+          <h3>Подбор банка</h3>
+          <p>Сравниваем условия нескольких банков-гарантов под вашу ситуацию.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">03</p>
+          <h3>Согласование</h3>
+          <p>Фиксируем комиссию и срок выпуска в договоре — до того как вы соберёте документы.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">04</p>
+          <h3>Выпуск</h3>
+          <p>Банк выпускает гарантию в форме, готовой для загрузки на электронную площадку.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Частые вопросы</p>
+        <h2>Вопросы, которые задают до заявки</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Что если банк откажет по моей заявке?</summary>
+          <p>Работаем сразу с несколькими банками-партнёрами — если один банк отказывает, подаём заявку в другой, без повторного сбора всех документов с нуля.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Сколько времени занимает оформление?</summary>
+          <p>Срок зависит от банка и суммы гарантии — точный срок называем после того, как рассмотрим параметры вашего контракта, и фиксируем его в договоре.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Какие документы нужны для подачи заявки?</summary>
+          <p>Базовый пакет — учредительные документы, финансовая отчётность и документы по закупке (извещение, проект контракта). Полный список присылаем сразу после первого обращения — под вашу ситуацию.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Работаете ли вы с контрактами вне 44-ФЗ и 223-ФЗ?</summary>
+          <p>Да — оформляем обеспечение и для коммерческих контрактов между компаниями, не только для госзакупок.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="lead" id="lead-form">
+    <div class="container">
+      <div class="lead-inner">
+        <div class="lead-head">
+          <p class="eyebrow">Оставить заявку</p>
+          <h2>Расскажите о контракте</h2>
+          <p class="lede">Подберём банк и покажем условия до того, как вы начнёте собирать документы.</p>
+        </div>
+
+        <form id="request-form" novalidate>
+          <div class="field" style="position:absolute; left:-9999px;" aria-hidden="true">
+            <label for="f-website">Оставьте это поле пустым</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="f-name">Имя <span class="req">*</span></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Телефон <span class="req">*</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="service-select">Тип обеспечения</label>
+            <select id="service-select" name="service">
+              <option value="">Не уверен(а), нужна консультация</option>
+              <option value="Участие в тендере">Участие в тендере</option>
+              <option value="Исполнение контракта">Исполнение контракта</option>
+              <option value="Возврат аванса">Возврат аванса</option>
+              <option value="Гарантийные обязательства">Гарантийные обязательства</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-amount">Сумма БГ</label>
+            <input id="f-amount" name="amount" type="text" placeholder="например, 2 500 000 ₽">
+          </div>
+          <div class="field full">
+            <label for="f-comment">Комментарий</label>
+            <textarea id="f-comment" name="comment" placeholder="Номер закупки, срок, особые условия — если есть"></textarea>
+          </div>
+          <div class="field full consent-field">
+            <label class="consent-label">
+              <input id="f-consent" name="consent" type="checkbox" required>
+              <span>Согласен(на) на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a> <span class="req">*</span></span>
+            </label>
+          </div>
+          <div class="lead-submit">
+            <button class="btn btn-primary" type="submit">Отправить заявку</button>
+            <span class="form-note">Заявка ни к чему не обязывает.</span>
+          </div>
+        </form>
+
+        <div id="form-success" hidden tabindex="-1">
+          <h3>Заявка получена</h3>
+          <p>Мы свяжемся с вами, чтобы уточнить детали и показать варианты банков. Или позвоните: +7 965 349-26-96.</p>
+        </div>
+
+        <p id="form-error" class="form-error" hidden role="alert">Не получилось отправить заявку — проверьте соединение и попробуйте ещё раз, либо позвоните: +7 965 349-26-96.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#top" aria-label="JETCORE — на главную">
+          <img class="logo-mark" src="logo.png" alt="" width="36" height="30">
+          <span class="logo-divider" aria-hidden="true"></span>
+          <span class="logo-text">
+            <span class="logo-title">JETCORE</span>
+            <span class="logo-tagline">для качественных и быстрых решений</span>
+          </span>
+        </a>
+        <p>Обеспечение по контрактам — с условиями, зафиксированными на берегу.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+79653492696">+7 965 349-26-96</a></li>
+          <li><a href="mailto:m.mekhtiev@jetcore.pro">m.mekhtiev@jetcore.pro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>График работы</h4>
+        <p>Пн–Пт, 9:00–18:00</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="#about">Подход</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#process">Процесс</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JETCORE</span>
+      <span>Обеспечение исполнения контрактов</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var form = document.getElementById('request-form');
+    var success = document.getElementById('form-success');
+    var errorBox = document.getElementById('form-error');
+    var serviceSelect = document.getElementById('service-select');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // n8n Webhook node (production URL). Only reachable while n8n is
+    // running on this machine — see chat notes on moving it to a server.
+    var LEAD_WEBHOOK_URL = 'http://localhost:5678/webhook/jetcore-lead';
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // Honeypot: обычные посетители это поле не видят и не заполняют.
+      // Если оно заполнено — запрос почти наверняка от бота, тихо "успеваем",
+      // ничего никуда не отправляя.
+      if (form.website.value.trim() !== '') {
+        form.hidden = true;
+        success.hidden = false;
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      errorBox.hidden = true;
+
+      var payload = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        service: form.service.value,
+        amount: form.amount.value.trim(),
+        comment: form.comment.value.trim(),
+        consentGiven: form.consent.checked,
+        submittedAt: new Date().toISOString()
+      };
+
+      var controller = new AbortController();
+      var timeoutId = setTimeout(function(){ controller.abort(); }, 10000);
+
+      fetch(LEAD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      })
+        .then(function(res){
+          clearTimeout(timeoutId);
+          if (!res.ok) { throw new Error('bad status ' + res.status); }
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+        })
+        .catch(function(){
+          clearTimeout(timeoutId);
+          errorBox.hidden = false;
+          submitBtn.disabled = false;
+        });
+    });
+
+    document.querySelectorAll('.service-cta').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var value = btn.getAttribute('data-service');
+        if (value) { serviceSelect.value = value; }
+        document.getElementById('lead-form').scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
