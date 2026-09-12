@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=55">
+<link rel="stylesheet" href="assets/style.css?v=57">
 <style>
   /* ---------- hero (картинка на весь экран, без текста) ---------- */
   .hero{
@@ -21,8 +21,8 @@
     will-change:transform;
   }
   .hero__bg{
-    width:100%; height:100%; object-fit:cover; object-position:50% 10%;
-    transform-origin:52% 30%;
+    width:100%; height:100%; object-fit:cover; object-position:42% 10%;
+    transform-origin:50% 10%;
     opacity:0;
     animation:
       heroFadeIn 1.6s ease-out forwards,
@@ -139,6 +139,8 @@
     .about__row__art img, .about__row--reverse .about__row__art img{ max-width:320px; transform:none; }
     .about__row__text{ padding-inline:0; }
     .about__row__text p{ margin-inline:auto; }
+    .about__row__text--split{ flex-direction:column; gap:10px; }
+    .about__row__icon{ height:32px; }
     .about__founder{ text-align:center; margin-top:70px; }
   }
 
@@ -312,7 +314,7 @@
 
 <section class="hero" id="top">
   <div class="hero__bg-wrap">
-    <img class="hero__bg" src="assets/hero-sign.jpg" alt="Фасад Триггер Бар с вывеской">
+    <img class="hero__bg" src="assets/hero-sign.jpg?v=2" alt="Фасад Триггер Бар с вывеской">
   </div>
   <div class="hero__scrim"></div>
   <a href="#intro" class="hero__scroll"><i></i></a>
