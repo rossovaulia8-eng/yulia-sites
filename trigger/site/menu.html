@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=52">
+<link rel="stylesheet" href="assets/style.css?v=54">
 <style>
   .menu-hero{
     position:relative; z-index:1; padding:170px 0 110px; overflow:hidden; text-align:center;
@@ -69,6 +69,18 @@
   @media (max-width: 860px){
     .menu-nav{ top:116px; }
   }
+  .menu-nav::before{
+    content:''; position:absolute; top:0; right:0; bottom:1px; width:52px;
+    background:linear-gradient(90deg, transparent, rgba(13,13,12,.96) 65%);
+    pointer-events:none; opacity:1; transition:opacity .25s ease;
+  }
+  .menu-nav::after{
+    content:'\203A'; position:absolute; top:50%; right:10px; transform:translateY(-50%);
+    font-size:1.5rem; line-height:1; color:var(--gold-bright); pointer-events:none;
+    opacity:1; transition:opacity .25s ease; animation:menuNavHint 1.8s ease-in-out infinite;
+  }
+  .menu-nav.is-end::before, .menu-nav.is-end::after{ opacity:0; }
+  @keyframes menuNavHint{ 0%,100%{ transform:translate(0,-50%); } 50%{ transform:translate(4px,-50%); } }
   .menu-nav__inner{ display:inline-flex; gap:8px; padding:14px var(--gutter); }
   .menu-nav a{
     flex:none; padding:9px 16px; border-radius:8px; border:1px solid var(--line);

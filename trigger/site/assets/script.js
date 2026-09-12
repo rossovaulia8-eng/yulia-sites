@@ -74,4 +74,16 @@
 
   wireForm('.booking-form', '.booking-form__status', 'Заявка оформлена! Мы свяжемся с вами, чтобы подтвердить бронь.');
   wireForm('.contacts-form', '.contacts-form__status', 'Сообщение отправлено! Мы ответим в ближайшее время.');
+
+  // Подсказка «→» у списка разделов меню: скрываем её, когда докрутили до конца.
+  var menuNav = document.querySelector('.menu-nav');
+  if (menuNav){
+    var updateMenuNavHint = function(){
+      var atEnd = menuNav.scrollLeft + menuNav.clientWidth >= menuNav.scrollWidth - 4;
+      menuNav.classList.toggle('is-end', atEnd);
+    };
+    updateMenuNavHint();
+    menuNav.addEventListener('scroll', updateMenuNavHint, { passive: true });
+    window.addEventListener('resize', updateMenuNavHint);
+  }
 })();
