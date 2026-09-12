@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Триггер Бар — общие стили (переменные, шапка, кнопки, подвал, утилиты)
+   ========================================================================== */
+
+:root{
+  /* --ink* — тёмные поверхности (фон), как на ugolek.moscow; --paper* — светлый текст */
+  --ink:        #0d0d0c;
+  --ink-2:      #161615;
+  --ink-3:      #201f1d;
+  --gold:       #d89a1e;
+  --gold-bright:#f3bd45;
+  --gold-dim:   #b9862a;
+  --accent:     #a70d7e;
+  --accent-bright:#c21c96;
+  --paper:      #f2ede0;
+  --paper-dim:  #a89f8c;
+  --line:       rgba(216,154,30,.2);
+  --shadow:     0 30px 60px -20px rgba(0,0,0,.6);
+
+  --font-display: 'Rubik Distressed', system-ui, sans-serif;
+  --font-body:    'Rubik', system-ui, sans-serif;
+  --font-hand:    'Rubik Distressed', cursive;
+
+  --container: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4{ margin:0; font-family:var(--font-display); font-weight:400; text-transform:uppercase; letter-spacing:.01em; }
+p{ margin:0; }
+button{ font-family:inherit; }
+
+.container{ max-width:var(--container); margin-inline:auto; padding-inline:var(--gutter); }
+
+/* лёгкое зерно поверх плоского тёмного фона — без декоративных паттернов, атмосферу держат фото и иллюстрации */
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:999; pointer-events:none;
+  opacity:.045; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- eyebrow / tags ---------- */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--font-body); font-weight:700; font-size:.72rem;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--gold-bright);
+}
+.eyebrow::before{ content:''; width:22px; height:2px; background:var(--gold); }
+
+.hand{ font-family:var(--font-hand); font-weight:400; font-style:italic; color:var(--gold-bright); }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:16px 30px; border-radius:8px;
+  font-family:var(--font-body); font-weight:700; font-size:.85rem;
+  letter-spacing:.06em; text-transform:uppercase;
+  border:2px solid var(--accent); background:var(--accent); color:var(--paper);
+  cursor:pointer; transition:transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+  white-space:nowrap;
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -10px rgba(167,13,126,.55); background:var(--accent-bright); border-color:var(--accent-bright); }
+.btn--ghost{ background:transparent; color:var(--paper); }
+.btn--ghost:hover{ background:var(--accent); color:var(--paper); }
+.btn--sm{ padding:10px 20px; font-size:.72rem; }
+.btn--block{ width:100%; }
+
+/* ==========================================================================
+   Навигация
+   ========================================================================== */
+.nav{
+  position:sticky; top:0; z-index:200;
+  background:rgba(13,13,12,.82); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav__inner{
+  max-width:var(--container); margin-inline:auto; padding:14px var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.nav__brand{ display:flex; align-items:center; gap:12px; position:relative; z-index:2; }
+.nav__brand::before{
+  content:''; position:absolute; left:50%; top:50%; width:150px; height:150px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, var(--accent-bright) 0%, var(--accent) 50%, transparent 72%);
+  filter:blur(18px); opacity:.6; z-index:0; pointer-events:none;
+}
+.nav__logo{ position:relative; z-index:1; height:132px; width:auto; flex:none; filter:drop-shadow(0 8px 16px rgba(0,0,0,.6)); }
+@media (max-width: 860px){
+  .nav__logo{ height:88px; }
+  .nav__brand::before{ width:104px; height:104px; filter:blur(14px); }
+}
+
+.nav__links{ display:flex; align-items:center; gap:34px; }
+.nav__links a:not(.btn){
+  position:relative; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--paper-dim);
+  transition:color .2s ease;
+}
+.nav__links a:not(.btn)::after{
+  content:''; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--gold);
+  transition:right .25s ease;
+}
+.nav__links a:not(.btn):hover{ color:var(--paper); }
+.nav__links a:not(.btn):hover::after{ right:0; }
+.nav__links a.is-active{ color:var(--gold-bright); }
+.nav__phone{ color:var(--gold-bright) !important; }
+.nav__phone:hover{ color:var(--gold) !important; }
+
+.nav__burger{
+  display:none; width:44px; height:44px; border:1px solid var(--line); border-radius:6px;
+  background:transparent; position:relative; cursor:pointer;
+}
+.nav__burger span{
+  position:absolute; left:12px; right:12px; top:21px; height:2px; background:var(--paper); transition:transform .25s ease, opacity .25s ease;
+}
+.nav__burger span::before, .nav__burger span::after{
+  content:''; position:absolute; left:0; right:0; height:2px; background:var(--paper); transition:transform .25s ease, opacity .25s ease;
+}
+.nav__burger span::before{ top:-7px; }
+.nav__burger span::after{ top:7px; }
+.nav.is-open .nav__burger span{ background:transparent; }
+.nav.is-open .nav__burger span::before{ transform:translateY(7px) rotate(45deg); }
+.nav.is-open .nav__burger span::after{ transform:translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 860px){
+  .nav__links{
+    position:fixed; inset:116px 0 0 0; height:calc(100dvh - 116px);
+    background:var(--ink); flex-direction:column; justify-content:center; gap:30px;
+    transform:translateX(100%); transition:transform .35s ease; z-index:150;
+  }
+  .nav.is-open .nav__links{ transform:translateX(0); }
+  .nav__links a{ font-size:1.3rem; }
+  .nav__burger{ display:block; }
+}
+
+/* ==========================================================================
+   Подвал
+   ========================================================================== */
+.footer{
+  border-top:1px solid var(--line);
+  padding:56px 0 30px;
+  background:var(--ink-2);
+}
+.footer__inner{
+  display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; align-items:flex-start;
+}
+.footer__brand{ display:flex; align-items:center; gap:14px; position:relative; }
+.footer__brand::before{
+  content:''; position:absolute; left:50%; top:50%; width:158px; height:158px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, var(--accent-bright) 0%, var(--accent) 50%, transparent 72%);
+  filter:blur(18px); opacity:.6; z-index:0; pointer-events:none;
+}
+.footer__logo{ position:relative; z-index:1; height:140px; width:auto; }
+.footer__word{ font-family:var(--font-display); font-weight:400; font-size:1.15rem; }
+.footer__col h4{ font-family:var(--font-body); font-size:.72rem; letter-spacing:.2em; color:var(--gold-bright); margin-bottom:14px; text-transform:uppercase; }
+.footer__col p, .footer__col a{ font-size:.92rem; color:var(--paper-dim); display:block; margin-bottom:8px; }
+.footer__col a:hover{ color:var(--gold-bright); }
+.footer__bottom{
+  margin-top:44px; padding-top:22px; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
+  font-size:.76rem; color:var(--paper-dim);
+}
+.footer__bottom a:hover{ color:var(--gold-bright); }
+
+/* ==========================================================================
+   Утилиты анимации на скролл
+   ========================================================================== */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.is-visible{ opacity:1; transform:none; }
+
+.marquee{
+  overflow:hidden; background:var(--accent); color:var(--paper);
+  border-block:1px solid var(--ink);
+}
+.marquee__track{
+  display:flex; width:max-content; gap:0; animation:marquee 32s linear infinite;
+}
+.marquee__track span{
+  display:flex; align-items:center; gap:16px;
+  padding:14px 28px; font-family:var(--font-display); font-weight:400; font-size:.95rem;
+  letter-spacing:.03em; text-transform:uppercase; white-space:nowrap;
+}
+.marquee__track span::after{ content:'\2726'; font-size:.7rem; opacity:.6; }
+@keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce){
+  .marquee__track{ animation:none; }
+  .reveal{ opacity:1; transform:none; transition:none; }
+}
