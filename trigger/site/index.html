@@ -118,9 +118,6 @@
   .about__row__text{ flex:1 1 34%; padding-inline:var(--gutter); }
   .about__row__text h3{ font-size:1.5rem; color:var(--gold-bright); margin-bottom:14px; }
   .about__row__text p{ font-size:1rem; color:var(--paper-dim); max-width:34ch; }
-  .about__row__text--split{ display:flex; align-items:center; gap:40px; }
-  .about__row__copy{ flex:1 1 auto; min-width:0; }
-  .about__row__icon{ height:120px; width:auto; flex:none; opacity:.9; }
 
   .about__founder{
     position:relative; z-index:1; max-width:760px; margin:110px auto 0;
@@ -140,8 +137,6 @@
     .about__row__art img, .about__row--reverse .about__row__art img{ max-width:320px; transform:none; }
     .about__row__text{ padding-inline:0; }
     .about__row__text p{ margin-inline:auto; }
-    .about__row__text--split{ flex-direction:column; gap:10px; }
-    .about__row__icon{ height:32px; }
     .about__row__tag--home{ left:auto; right:6%; top:4%; }
     .about__founder{ text-align:center; margin-top:70px; }
   }
@@ -265,6 +260,7 @@
   }
   .contacts__phone:hover{ color:var(--gold); }
   .contacts__address{ margin-top:10px !important; color:var(--paper-dim); font-size:.92rem; }
+  .contacts__hours{ margin-top:6px !important; color:var(--paper-dim); font-size:.92rem; }
   .contacts__map{
     margin-top:30px; border-radius:10px; overflow:hidden; border:1px solid var(--line);
     aspect-ratio:16/11; background:var(--ink);
@@ -324,8 +320,8 @@
 
 <div class="marquee">
   <div class="marquee__track">
-    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span>
-    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span>
+    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
+    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
   </div>
 </div>
 
@@ -369,15 +365,12 @@
       </div>
       <div class="about__row about__row--reverse reveal">
         <div class="about__row__art">
-          <img src="assets/drummer.webp" alt="Атмосфера рока">
+          <img src="assets/drummer.webp" alt="Атмосфера рок-н-ролла">
           <span class="about__row__tag">без выходных</span>
         </div>
-        <div class="about__row__text about__row__text--split">
-          <div class="about__row__copy">
-            <h3>Атмосфера рока</h3>
-            <p>Фестивали, квизы, тематические вечеринки и просто шумные вечера — в Триггере всегда есть повод остаться допоздна.</p>
-          </div>
-          <img src="assets/rock-hand.webp" alt="" class="about__row__icon">
+        <div class="about__row__text">
+          <h3>Атмосфера рок-н-ролла</h3>
+          <p>Фестивали, квизы, тематические вечеринки и просто шумные вечера — в Триггере всегда есть повод остаться допоздна.</p>
         </div>
       </div>
       <div class="about__row reveal">
@@ -472,6 +465,7 @@
       <p>Звони, если хочешь уточнить бронь, узнать про мероприятие или просто спросить, что сегодня играет.</p>
       <a href="tel:+79268284232" class="contacts__phone">+7 926 828-43-32</a>
       <p class="contacts__address">Варшавское шоссе, 45<br>м. Нагатинская</p>
+      <p class="contacts__hours">Пн–Чт 16:00–00:00 · Пт–Сб 16:00–01:00 · Вс 16:00–23:00</p>
       <div class="contacts__map">
         <iframe src="https://yandex.ru/map-widget/v1/?ll=37.6252991%2C55.6800044&z=17&l=map&pt=37.6252991,55.6800044,pm2rdm" loading="lazy" title="Триггер Бар на карте"></iframe>
       </div>
@@ -484,8 +478,8 @@
         <input id="cf-name" name="name" type="text" placeholder="Как к вам обращаться" required>
       </div>
       <div class="field">
-        <label for="cf-contact">Телефон или Telegram</label>
-        <input id="cf-contact" name="contact" type="text" placeholder="Куда вам ответить" required>
+        <label for="cf-contact">Телефон или e-mail</label>
+        <input id="cf-contact" name="contact" type="text" placeholder="Телефон или e-mail" required>
       </div>
       <div class="field">
         <label for="cf-message">Сообщение</label>
@@ -507,6 +501,10 @@
         <h4>Адрес</h4>
         <p>Варшавское шоссе, 45<br>м. Нагатинская</p>
         <a href="tel:+79268284232">+7 926 828-43-32</a>
+      </div>
+      <div class="footer__col">
+        <h4>Часы работы</h4>
+        <p>Пн–Чт 16:00–00:00<br>Пт–Сб 16:00–01:00<br>Вс 16:00–23:00</p>
       </div>
       <div class="footer__col">
         <h4>Навигация</h4>

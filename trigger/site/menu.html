@@ -129,6 +129,42 @@
 
   .menu-cta{ text-align:center; padding:70px 0 110px; }
   .menu-cta p{ color:var(--paper-dim); margin-bottom:20px; }
+
+  .menu-section--karaoke{ padding-bottom:0; }
+  .menu-section--karaoke .menu-section__head{ margin-bottom:28px; }
+  .menu-karaoke{
+    position:relative; overflow:hidden;
+    width:100vw; margin-left:calc(50% - 50vw);
+    min-height:760px; display:flex; align-items:flex-end;
+    padding-bottom:64px;
+  }
+  .menu-karaoke__bg{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:26% 92%; z-index:0;
+  }
+  .menu-karaoke__scrim{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(13,13,12,0) 0%, rgba(13,13,12,.15) 55%, rgba(13,13,12,.88) 100%);
+  }
+  .menu-karaoke > .container{ width:100%; }
+  .menu-karaoke__body{ position:relative; z-index:2; width:100%; }
+  .menu-karaoke__group{ width:fit-content; margin-left:-4%; text-align:center; }
+  .menu-karaoke__group .menu-section__note{
+    color:var(--paper); font-weight:500; text-shadow:0 2px 10px rgba(0,0,0,.9), 0 1px 3px rgba(0,0,0,.9);
+  }
+  .menu-karaoke__group .menu-price-tiers{ flex-wrap:nowrap; }
+  @media (max-width: 760px){
+    .menu-karaoke{ min-height:0; display:block; padding-bottom:0; }
+    .menu-karaoke__bg{
+      position:relative; inset:auto; width:100%; height:auto;
+      aspect-ratio:900/560; object-position:34% 18%; display:block;
+    }
+    .menu-karaoke__scrim{ display:none; }
+    .menu-karaoke__body{
+      background:var(--ink-2); padding:28px 24px 32px; text-align:center;
+    }
+    .menu-karaoke__group{ width:auto; margin-left:0; }
+    .menu-karaoke__group .menu-price-tiers{ justify-content:center; flex-wrap:wrap; }
+  }
 </style>
 </head>
 <body>
@@ -196,6 +232,7 @@
     <a href="#cocktails">Коктейли</a>
     <a href="#tinctures">Настойки</a>
     <a href="#spirits">Крепкий алкоголь</a>
+    <a href="#karaoke">Караоке</a>
     <span class="menu-nav__hint" aria-hidden="true">&rsaquo;</span>
   </div>
 </nav>
@@ -404,7 +441,30 @@
       </div>
     </section>
 
-  </div>
+    </div>
+
+    <section class="menu-section menu-section--karaoke" id="karaoke">
+      <div class="container">
+        <div class="menu-section__head"><h2>Караоке</h2><span></span></div>
+      </div>
+      <div class="menu-karaoke reveal">
+        <img src="assets/karaoke.webp" alt="Караоке в Триггер Баре" class="menu-karaoke__bg">
+        <div class="menu-karaoke__scrim"></div>
+        <div class="container">
+          <div class="menu-karaoke__body">
+            <div class="menu-karaoke__group">
+              <p class="menu-section__note">Пой сколько хочешь — оплата по количеству песен.</p>
+              <div class="menu-price-tiers">
+                <div><b>250 ₽</b><span>1 песня</span></div>
+                <div><b>1000 ₽</b><span>5 песен</span></div>
+                <div><b>1800 ₽</b><span>10 песен</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 </main>
 
 <div class="menu-cta">
