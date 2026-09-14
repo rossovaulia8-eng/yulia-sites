@@ -69,7 +69,7 @@
   @media (max-width: 860px){
     .menu-nav{ top:116px; }
   }
-  .menu-nav__inner{ display:inline-flex; align-items:center; gap:8px; padding:14px var(--gutter); }
+  .menu-nav__inner{ display:flex; justify-content:safe center; min-width:100%; align-items:center; gap:8px; padding:14px var(--gutter); }
   .menu-nav__hint{
     position:sticky; right:6px; flex:none; margin-left:6px;
     width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
@@ -80,11 +80,18 @@
   .menu-nav.is-end .menu-nav__hint{ opacity:0; }
   @keyframes menuNavHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
   .menu-nav a{
-    flex:none; padding:9px 16px; border-radius:8px; border:1px solid var(--line);
-    font-size:.76rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--paper-dim);
+    flex:none; padding:9px 16px; border-radius:8px; border:1px solid transparent;
+    font-size:.76rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--paper);
+    background:
+      linear-gradient(var(--ink-2), var(--ink-2)) padding-box,
+      linear-gradient(135deg, #ff4fc3, #8b2fd1) border-box;
+    box-shadow: 0 0 10px rgba(255,79,195,.28), 0 0 18px rgba(139,47,209,.22);
     transition:all .2s ease;
   }
-  .menu-nav a:hover{ color:var(--gold-bright); border-color:var(--gold-dim); }
+  .menu-nav a:hover{
+    color:#fff;
+    box-shadow: 0 0 14px rgba(255,79,195,.5), 0 0 26px rgba(139,47,209,.4);
+  }
 
   .menu-body{ padding:70px 0 40px; }
   /* ---------- decor (гитары, закреплённые по краям — статичны при скролле) ---------- */
