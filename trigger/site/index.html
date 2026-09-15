@@ -119,8 +119,9 @@
   .about__row__text h3{ font-size:1.5rem; color:var(--gold-bright); margin-bottom:14px; }
   .about__row__text p{ font-size:1rem; color:var(--paper-dim); max-width:34ch; }
 
+  .about-founder-section{ padding:110px 0 130px; background:var(--ink); }
   .about__founder{
-    position:relative; z-index:1; max-width:760px; margin:110px auto 0;
+    position:relative; z-index:1; max-width:760px; margin:0 auto;
     padding-top:56px; border-top:1px solid var(--line);
   }
   .about__founder blockquote{ margin:16px 0 22px; }
@@ -138,7 +139,8 @@
     .about__row__text{ padding-inline:0; }
     .about__row__text p{ margin-inline:auto; }
     .about__row__tag--home{ left:auto; right:6%; top:4%; }
-    .about__founder{ text-align:center; margin-top:70px; }
+    .about__founder{ text-align:center; }
+    .about-founder-section{ padding:70px 0 90px; }
   }
 
   /* ---------- afisha / calendar ---------- */
@@ -171,8 +173,8 @@
   .afisha__head h2{ font-size:clamp(2rem, 4vw, 2.9rem); margin-top:14px; }
   .afisha__tabs{ display:flex; flex-wrap:wrap; gap:10px; }
   .afisha__tabs button{
-    padding:10px 20px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--paper-dim);
-    font-weight:700; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; cursor:pointer;
+    padding:10px 20px; min-width:120px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--paper-dim);
+    font-weight:700; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; text-align:center; cursor:pointer;
     transition:all .2s ease;
   }
   .afisha__tabs button.is-active, .afisha__tabs button:hover{ background:var(--accent); color:var(--paper); border-color:var(--accent); }
@@ -386,15 +388,6 @@
         </div>
       </div>
   </div>
-  <div class="container">
-    <div class="about__founder reveal">
-      <span class="eyebrow">Из первых уст</span>
-      <blockquote>
-        <p>«Не слушать чужих советов, гнуть свою линию, воплощать свои идеи в жизнь» — так Дмитрий Сумин, владелец Триггера, отвечает на вопрос, с чего начать свой бизнес.</p>
-      </blockquote>
-      <p class="about__founder__note">История перерождения Триггера началась в 2026 году — после того как здесь выступила рок-группа «Агент СмиД». Дмитрий сделал ставку на живое общение с гостями вместо безликого сервиса.</p>
-    </div>
-  </div>
 </section>
 
 <section class="afisha" id="afisha">
@@ -410,6 +403,18 @@
     </div>
     <div class="afisha__grid" id="afishaGrid"></div>
     <p class="afisha__foot">Расписание обновляется каждую неделю — если группы, которую ты ищешь, здесь ещё нет, уточни в баре.</p>
+  </div>
+</section>
+
+<section class="about-founder-section">
+  <div class="container">
+    <div class="about__founder reveal">
+      <span class="eyebrow">Из первых уст</span>
+      <blockquote>
+        <p>«Не слушать чужих советов, гнуть свою линию, воплощать свои идеи в жизнь» — так Дмитрий Сумин, владелец Триггера, отвечает на вопрос, с чего начать свой бизнес.</p>
+      </blockquote>
+      <p class="about__founder__note">История перерождения Триггера началась в 2026 году — после того как здесь выступила рок-группа «Агент СмиД». Дмитрий сделал ставку на живое общение с гостями вместо безликого сервиса.</p>
+    </div>
   </div>
 </section>
 
