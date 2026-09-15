@@ -182,6 +182,7 @@
     display:flex; gap:18px; background:var(--ink); border:1px solid var(--line); border-radius:8px; padding:20px;
     transition:transform .2s ease, border-color .2s ease;
     opacity:0; transform:translateY(16px); animation:cardIn .5s ease forwards;
+    text-decoration:none;
   }
   .event-card:hover{ transform:translateY(-4px) rotate(-.6deg); border-color:var(--gold-dim); }
   @keyframes cardIn{ to{ opacity:1; transform:translateY(0); } }
@@ -302,8 +303,9 @@
       <a href="#about">О баре</a>
       <a href="#afisha">Афиша</a>
       <a href="menu.html">Меню</a>
+      <a href="rider.html">Технический райдер</a>
       <a href="#contacts">Контакты</a>
-      <a href="tel:+79268284232" class="nav__phone">+7 926 828-43-32</a>
+      <a href="tel:+79268284232" class="nav__phone">+7 926 828-42-32</a>
       <a href="#booking" class="btn btn--sm">Забронировать стол</a>
     </nav>
     <button class="nav__burger" aria-label="Открыть меню"><span></span></button>
@@ -463,7 +465,7 @@
       <span class="eyebrow">На связи</span>
       <h2>Контакты</h2>
       <p>Звони, если хочешь уточнить бронь, узнать про мероприятие или просто спросить, что сегодня играет.</p>
-      <a href="tel:+79268284232" class="contacts__phone">+7 926 828-43-32</a>
+      <a href="tel:+79268284232" class="contacts__phone">+7 926 828-42-32</a>
       <p class="contacts__address">Варшавское шоссе, 45<br>м. Нагатинская</p>
       <p class="contacts__hours">Пн–Чт 16:00–00:00 · Пт–Сб 16:00–01:00 · Вс 16:00–23:00</p>
       <div class="contacts__map">
@@ -500,7 +502,7 @@
       <div class="footer__col">
         <h4>Адрес</h4>
         <p>Варшавское шоссе, 45<br>м. Нагатинская</p>
-        <a href="tel:+79268284232">+7 926 828-43-32</a>
+        <a href="tel:+79268284232">+7 926 828-42-32</a>
       </div>
       <div class="footer__col">
         <h4>Часы работы</h4>
@@ -511,6 +513,7 @@
         <a href="#about">О баре</a>
         <a href="#afisha">Афиша</a>
         <a href="menu.html">Меню</a>
+        <a href="rider.html">Технический райдер</a>
       </div>
       <div class="footer__col">
         <h4>Бронь</h4>
@@ -529,7 +532,11 @@
 <script>
 (function(){
   var events = [
-    {date:'2026-09-24', title:'Виноградный Меркурий', time:'19:00–23:00'},
+    {date:'2026-09-17', title:'Dream Day — Green Day Tribute', time:'20:00', poster:'event-dream-day.html'},
+    {date:'2026-09-18', title:'Trigger Rock Fest — Ульяна Петраш, Bartezz', time:'19:00', poster:'event-trigger-rock-fest.html'},
+    {date:'2026-09-19', title:'Костёр — Арт-Пикник, день 1', time:'16:00–01:00', poster:'event-koster-19.html'},
+    {date:'2026-09-20', title:'Костёр — Арт-Пикник, день 2', time:'16:00–23:00', poster:'event-koster-20.html'},
+    {date:'2026-09-24', title:'Меркурий-Фест', time:'19:00–23:00', poster:'event-merkuriy-fest.html'},
     {date:'2026-09-25', title:'Woman Fest (Вадим)', time:'19:00–23:00'},
     {date:'2026-09-26', title:'Рок-фест «Лыжня», 4 группы', time:'18:00–23:00'},
 
@@ -600,8 +607,9 @@
     list.forEach(function(ev, i){
       var day = ev.date.slice(8,10);
       var mon = monthNamesShort[ev.date.slice(5,7)];
-      var card = document.createElement('article');
+      var card = document.createElement(ev.poster ? 'a' : 'article');
       card.className = 'event-card';
+      if (ev.poster) card.href = ev.poster;
       card.style.animationDelay = (Math.min(i, 10) * 0.05) + 's';
       card.innerHTML =
         '<div class="event-card__date"><b>' + day + '</b><span>' + mon + '</span></div>' +
