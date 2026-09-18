@@ -247,14 +247,19 @@
     color:var(--gold-dim); transform:rotate(-3deg); display:inline-block;
   }
   .afisha__foot{ margin-top:34px; font-size:.86rem; color:var(--paper-dim); }
-  .afisha__week__hint{
-    position:sticky; right:6px; flex:none; align-self:center; margin-left:-6px;
-    width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-    background:rgba(13,13,12,.9); border:1px solid var(--line); color:var(--gold-bright);
-    font-size:1.3rem; line-height:1; pointer-events:none;
-    opacity:1; transition:opacity .25s ease; animation:afishaWeekHint 1.8s ease-in-out infinite;
+  /* стрелки прокрутки ленты: липнут к краям и не занимают места (отрицательный отступ = ширина + gap) */
+  .afisha__week__arrow{
+    position:sticky; z-index:2; flex:none; align-self:center;
+    width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(13,13,12,.92); border:1px solid var(--gold-dim); color:var(--gold-bright);
+    font:inherit; font-size:1.4rem; line-height:1; cursor:pointer;
+    transition:opacity .25s ease, background .2s ease, color .2s ease;
   }
-  .afisha__week.is-end .afisha__week__hint{ opacity:0; }
+  .afisha__week__arrow:hover{ background:var(--accent); border-color:var(--accent); color:var(--paper); }
+  .afisha__week__arrow--next{ right:6px; margin-left:-54px; animation:afishaWeekHint 1.8s ease-in-out infinite; }
+  .afisha__week__arrow--prev{ left:6px; margin-right:-54px; order:-1; }
+  .afisha__week.is-end .afisha__week__arrow--next,
+  .afisha__week.is-start .afisha__week__arrow--prev{ opacity:0; pointer-events:none; }
   @keyframes afishaWeekHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
 
   /* список ближайших событий — только на телефоне, вместо ленты недели */
@@ -742,7 +747,8 @@
     return events.find(function(e){ return e.date === key; });
   }
 
-  // Состояние: какую неделю показывает лента (десктоп) и с какой даты начинается список (телефон)
+  // Состояние: лента (десктоп) показывает весь месяц из мини-календаря и открывается на неделе selectedMonday;
+  // список (телефон) начинается с listFromKey
   var selectedMonday = mondayOf(today);
   var listFromKey = todayKey;
   var listLimit = LIST_STEP;
@@ -773,26 +779,39 @@
   }
 
   function renderWeek(){
+    var base = new Date(today.getFullYear(), today.getMonth() + miniMonthOffset, 1);
+    var totalDays = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+    // к какой карточке прокрутить: понедельник выбранной недели, но не раньше 1-го числа месяца
+    var focusKey = toKey(selectedMonday) < toKey(base) ? toKey(base) : toKey(selectedMonday);
+    var focusCell = null;
+
     weekEl.innerHTML = '';
-    for (var i = 0; i < 7; i++){
-      var d = new Date(selectedMonday);
-      d.setDate(selectedMonday.getDate() + i);
-      var cell = dayCard(d, eventOn(toKey(d)), i);
-      cell.style.animationDelay = (i * 0.05) + 's';
+    for (var i = 0; i < totalDays; i++){
+      var d = new Date(base.getFullYear(), base.getMonth(), i + 1);
+      var cell = dayCard(d, eventOn(toKey(d)), (d.getDay() + 6) % 7);
+      cell.style.animationDelay = (Math.min(i, 10) * 0.04) + 's';
+      if (toKey(d) === focusKey) focusCell = cell;
       weekEl.appendChild(cell);
     }
-    var hint = document.createElement('span');
-    hint.className = 'afisha__week__hint';
-    hint.setAttribute('aria-hidden', 'true');
-    hint.textContent = '›';
-    weekEl.appendChild(hint);
-    weekEl.scrollLeft = 0;
+    [['prev', '‹', 'Прокрутить назад', -1], ['next', '›', 'Прокрутить вперёд', 1]].forEach(function(a){
+      var arrow = document.createElement('button');
+      arrow.type = 'button';
+      arrow.className = 'afisha__week__arrow afisha__week__arrow--' + a[0];
+      arrow.setAttribute('aria-label', a[2]);
+      arrow.textContent = a[1];
+      arrow.addEventListener('click', function(){
+        weekEl.scrollBy({ left: a[3] * (weekEl.clientWidth - 60), behavior: 'smooth' });
+      });
+      weekEl.appendChild(arrow);
+    });
+    weekEl.scrollLeft = focusCell ? focusCell.offsetLeft - weekEl.firstElementChild.offsetLeft : 0;
     updateWeekHint();
   }
 
   function updateWeekHint(){
     var atEnd = weekEl.scrollLeft + weekEl.clientWidth >= weekEl.scrollWidth - 4;
     weekEl.classList.toggle('is-end', atEnd);
+    weekEl.classList.toggle('is-start', weekEl.scrollLeft <= 4);
   }
   weekEl.addEventListener('scroll', updateWeekHint, { passive: true });
   window.addEventListener('resize', updateWeekHint);
@@ -887,8 +906,18 @@
     calToggle.textContent = open ? 'Скрыть календарь' : 'Весь месяц';
   }
 
-  document.getElementById('afishaMiniCalPrev').addEventListener('click', function(){ miniMonthOffset -= 1; renderMiniCal(); });
-  document.getElementById('afishaMiniCalNext').addEventListener('click', function(){ miniMonthOffset += 1; renderMiniCal(); });
+  // Листаем месяц в мини-календаре — лента переключается на этот месяц:
+  // текущий открывается на сегодняшней неделе, остальные — с 1-го числа
+  function changeMonth(step){
+    miniMonthOffset += step;
+    selectedMonday = miniMonthOffset === 0
+      ? mondayOf(today)
+      : mondayOf(new Date(today.getFullYear(), today.getMonth() + miniMonthOffset, 1));
+    renderWeek();
+    renderMiniCal();
+  }
+  document.getElementById('afishaMiniCalPrev').addEventListener('click', function(){ changeMonth(-1); });
+  document.getElementById('afishaMiniCalNext').addEventListener('click', function(){ changeMonth(1); });
   miniResetBtn.addEventListener('click', resetToToday);
   listResetBtn.addEventListener('click', resetToToday);
   moreBtn.addEventListener('click', function(){ listLimit += LIST_STEP; renderList(); });
