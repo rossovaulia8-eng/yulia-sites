@@ -187,16 +187,26 @@
     text-align:center; font-weight:700; font-size:.76rem; letter-spacing:.03em; color:var(--paper-dim);
   }
   .afisha__minical__grid{ display:grid; grid-template-columns:repeat(7, 1fr); gap:2px; }
-  .afisha__minical__grid span{
+  .afisha__minical__grid > *{
     display:flex; align-items:center; justify-content:center; aspect-ratio:1; border-radius:50%;
     font-size:.66rem; color:var(--paper-dim);
   }
-  .afisha__minical__grid span.is-clickable{ cursor:pointer; transition:background .15s ease, color .15s ease; }
-  .afisha__minical__grid span.is-clickable:hover{ background:var(--accent); color:var(--paper); }
-  .afisha__minical__grid span.is-event{ color:var(--gold-bright); font-weight:700; }
-  .afisha__minical__grid span.is-head{ color:var(--gold-dim); font-weight:700; font-size:.6rem; }
-  .afisha__minical__grid span.is-pad{ visibility:hidden; }
-  .afisha__minical__grid span.is-today{ background:var(--gold); color:var(--ink); font-weight:700; }
+  .afisha__minical__grid button{ border:0; background:transparent; font:inherit; font-size:.66rem; padding:0; cursor:pointer; transition:background .15s ease, color .15s ease; }
+  .afisha__minical__grid button:hover{ background:var(--accent); color:var(--paper); }
+  .afisha__minical__grid button:focus-visible{ outline:1px solid var(--gold-bright); outline-offset:1px; }
+  .afisha__minical__grid .is-week{ background:rgba(216,154,30,.13); border-radius:4px; }
+  .afisha__minical__grid .is-past{ opacity:.45; }
+  .afisha__minical__grid .is-event{ color:var(--gold-bright); font-weight:700; }
+  .afisha__minical__grid .is-head{ color:var(--gold-dim); font-weight:700; font-size:.6rem; }
+  .afisha__minical__grid .is-pad{ visibility:hidden; }
+  .afisha__minical__grid .is-today{ background:var(--gold); color:var(--ink); font-weight:700; border-radius:50%; opacity:1; }
+  .afisha__minical__reset{
+    display:block; width:100%; margin-top:10px; padding:6px 0; border:0; border-top:1px solid var(--line); background:none;
+    font:inherit; font-size:.7rem; font-weight:700; letter-spacing:.03em; color:var(--gold-bright); cursor:pointer;
+  }
+  .afisha__minical__reset:hover{ color:var(--paper); }
+  .afisha__minical__reset[hidden]{ display:none; }
+  .afisha__caltoggle{ display:none; }
 
   .afisha__week{
     display:flex; gap:14px; overflow-x:auto; padding-bottom:10px;
@@ -207,8 +217,20 @@
     flex:0 0 190px; min-height:180px; min-width:0; text-decoration:none; transition:transform .2s ease, border-color .2s ease;
     opacity:0; transform:translateY(16px); animation:cardIn .5s ease forwards; scroll-snap-align:start;
   }
+  .afisha__day{ position:relative; }
   .afisha__day--today{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
-  a.afisha__day:hover{ transform:translateY(-4px); border-color:var(--gold-dim); }
+  .afisha__day--past{ opacity:.45; }
+  .afisha__day:has(.afisha__day__link):hover{ transform:translateY(-4px); border-color:var(--gold-dim); }
+  /* ссылка на страницу события растянута на всю карточку, кнопка брони лежит поверх неё */
+  .afisha__day__link{ color:inherit; text-decoration:none; }
+  .afisha__day__link::after{ content:''; position:absolute; inset:0; border-radius:8px; }
+  .afisha__book{
+    position:relative; z-index:1; align-self:flex-start; display:inline-flex; align-items:center; gap:6px;
+    padding:7px 12px; border-radius:6px; border:1px solid var(--accent); background:rgba(167,13,126,.18);
+    font-size:.66rem; font-weight:700; letter-spacing:.02em; text-transform:uppercase; white-space:nowrap; color:var(--paper); text-decoration:none;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .afisha__book:hover{ background:var(--accent); border-color:var(--accent-bright); }
   @keyframes cardIn{ to{ opacity:1; transform:translateY(0); } }
   .afisha__day__date{
     flex:none; display:flex; align-items:baseline; gap:6px; line-height:1;
@@ -235,13 +257,33 @@
   .afisha__week.is-end .afisha__week__hint{ opacity:0; }
   @keyframes afishaWeekHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
 
-  @media (max-width: 760px){
-    .afisha__head{ align-items:flex-start; }
-    .afisha__minical{ width:100%; }
+  /* список ближайших событий — только на телефоне, вместо ленты недели */
+  .afisha__list{ display:none; }
+  .afisha__list__label{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px; font-size:.78rem; color:var(--paper-dim); }
+  .afisha__list__label button{ border:0; background:none; font:inherit; font-weight:700; color:var(--gold-bright); cursor:pointer; padding:0; }
+  .afisha__list__items{ display:flex; flex-direction:column; gap:10px; }
+  .afisha__list .afisha__day{ flex:none; flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px 16px; min-height:0; animation:none; opacity:1; transform:none; }
+  .afisha__list .afisha__day__date{ flex-direction:column; align-items:flex-start; gap:2px; width:52px; }
+  .afisha__list .afisha__day__body{ flex:1 1 0; }
+  .afisha__list .afisha__book{ flex-basis:100%; justify-content:center; padding:10px 12px; }
+  .afisha__list__empty{ padding:18px 16px; border:1px dashed var(--line); border-radius:8px; font-size:.86rem; color:var(--paper-dim); }
+  .afisha__more{
+    margin-top:12px; width:100%; padding:12px; border-radius:8px; border:1px solid var(--line); background:var(--ink);
+    font:inherit; font-size:.8rem; font-weight:700; color:var(--gold-bright); cursor:pointer;
   }
-  @media (max-width: 480px){
-    .afisha__day{ min-height:0; flex-direction:row; align-items:center; flex-basis:260px; }
-    .afisha__day__date{ flex-direction:column; align-items:flex-start; gap:0; }
+  .afisha__more[hidden]{ display:none; }
+
+  @media (max-width: 760px){
+    .afisha__head{ align-items:flex-start; margin-bottom:28px; }
+    .afisha__head > div:first-child{ flex:1 1 auto; }
+    .afisha__minical{ width:100%; display:none; }
+    .afisha__head.is-cal-open .afisha__minical{ display:block; }
+    .afisha__caltoggle{
+      display:inline-flex; align-self:flex-end; align-items:center; gap:8px; padding:9px 14px; border-radius:8px;
+      border:1px solid var(--line); background:var(--ink); font:inherit; font-size:.78rem; font-weight:700; color:var(--gold-bright); cursor:pointer;
+    }
+    .afisha__week{ display:none; }
+    .afisha__list{ display:block; }
   }
 
   /* ---------- booking ---------- */
@@ -268,6 +310,8 @@
     width:100%; background:var(--ink); border:1px solid var(--line); border-radius:6px; padding:14px 16px;
     color:var(--paper); font-family:var(--font-body); font-size:.96rem; outline:none; transition:border-color .2s ease;
   }
+  .field input[type="date"]{ color-scheme:dark; }
+  .booking-form{ scroll-margin-top:110px; }
   .field input:focus, .field select:focus{ border-color:var(--gold); }
   .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .field-check{
@@ -451,16 +495,23 @@
         <span class="eyebrow">Не пропусти</span>
         <h2>Афиша</h2>
       </div>
-      <div class="afisha__minical">
+      <button type="button" class="afisha__caltoggle" id="afishaCalToggle" aria-expanded="false" aria-controls="afishaMiniCal">Весь месяц</button>
+      <div class="afisha__minical" id="afishaMiniCal">
         <div class="afisha__minical__head">
           <button type="button" class="afisha__minical__nav" id="afishaMiniCalPrev" aria-label="Предыдущий месяц">‹</button>
           <span class="afisha__minical__label" id="afishaMiniCalLabel"></span>
           <button type="button" class="afisha__minical__nav" id="afishaMiniCalNext" aria-label="Следующий месяц">›</button>
         </div>
         <div class="afisha__minical__grid" id="afishaMiniCalGrid"></div>
+        <button type="button" class="afisha__minical__reset" id="afishaMiniCalReset" hidden>← К сегодняшнему дню</button>
       </div>
     </div>
     <div class="afisha__week" id="afishaWeek"></div>
+    <div class="afisha__list">
+      <div class="afisha__list__label"><span id="afishaListLabel">Ближайшие события</span><button type="button" id="afishaListReset" hidden>С сегодня</button></div>
+      <div class="afisha__list__items" id="afishaList"></div>
+      <button type="button" class="afisha__more" id="afishaMore" hidden>Показать ещё</button>
+    </div>
     <p class="afisha__foot">Расписание обновляется каждую неделю — если группы, которую ты ищешь, здесь ещё нет, уточни в баре.</p>
   </div>
 </section>
@@ -493,6 +544,10 @@
       <div class="field">
         <label for="bf-name">Имя гостя</label>
         <input id="bf-name" name="name" type="text" placeholder="Как к вам обращаться" required>
+      </div>
+      <div class="field">
+        <label for="bf-date">Дата визита</label>
+        <input id="bf-date" name="date" type="date" required>
       </div>
       <div class="field-row">
         <div class="field">
@@ -609,16 +664,17 @@
     {date:'2026-09-18', title:'Триггер Рок Фест — Ульяна Петраш, Бартезз', time:'19:00', poster:'event-trigger-rock-fest.html'},
     {date:'2026-09-19', title:'Костёр — Арт-Пикник, день 1', time:'16:00–01:00', poster:'event-koster-19.html'},
     {date:'2026-09-20', title:'Костёр — Арт-Пикник, день 2', time:'16:00–23:00', poster:'event-koster-20.html'},
+    {date:'2026-09-21', title:'«Агент СмиД» — открытая репетиция', poster:'event-agent-smid.html'},
     {date:'2026-09-24', title:'Меркурий-Фест', time:'19:00–23:00', poster:'event-merkuriy-fest.html'},
-    {date:'2026-09-25', title:'Woman Fest (Вадим)', time:'19:00–23:00'},
+    {date:'2026-09-25', title:'Вумэн Фест (Вадим)', time:'19:00–23:00'},
     {date:'2026-09-26', title:'Рок-фест «Лыжня», 4 группы', time:'18:00–23:00'},
 
     {date:'2026-10-02', title:'Фестиваль «Лыжня»'},
     {date:'2026-10-03', title:'Фестиваль андеграунд-музыки', time:'19:00–23:00'},
     {date:'2026-10-04', title:'ВЕГА — сольный концерт (Дмитрий, РОК1000)'},
-    {date:'2026-10-06', title:'«Лай, любовь и рок-н-ролл»', time:'20:00–22:00'},
+    {date:'2026-10-06', title:'«Лай, любовь и рок-н-ролл»', time:'Сбор 18:00, начало 20:00', poster:'event-lay-lyubov.html', tickets:'https://qtickets.ru/event/257793'},
     {date:'2026-10-08', title:'Виноградный Меркурий', time:'19:00–23:00'},
-    {date:'2026-10-09', title:'Keep Fire — сольник'},
+    {date:'2026-10-09', title:'Кип Файр — сольник'},
     {date:'2026-10-10', title:'Фестиваль «То-то и оно» и другие, 6 групп'},
     {date:'2026-10-11', title:'Натали Северр'},
     {date:'2026-10-16', title:'«4-й Дуст», акустика'},
@@ -627,7 +683,7 @@
     {date:'2026-10-20', title:'Кубок Москвы по караоке'},
     {date:'2026-10-21', title:'«Приди и спой!» — вечер Елены из Краснодара'},
     {date:'2026-10-22', title:'Виноградный Меркурий', time:'19:00–23:00'},
-    {date:'2026-10-23', title:'Woman Fest (Вадим)'},
+    {date:'2026-10-23', title:'Вумэн Фест (Вадим)'},
     {date:'2026-10-24', title:'Рок-фест «Триггер»'},
 
     {date:'2026-11-03', title:'Тусовка Алексея'},
@@ -636,73 +692,101 @@
     {date:'2026-11-07', title:'«Винтовка» фест'},
     {date:'2026-11-13', title:'Сольник группы «Н.З.»'},
     {date:'2026-11-14', title:'Рок-фест «Триггер»'},
-    {date:'2026-11-15', title:'Freedom Fest'},
+    {date:'2026-11-15', title:'Фридом Фест'},
     {date:'2026-11-19', title:'Виноградный Меркурий', time:'19:00–23:00'},
-    {date:'2026-11-20', title:'Woman Fest'},
+    {date:'2026-11-20', title:'Вумэн Фест'},
     {date:'2026-11-21', title:'Рок-фест «Триггер»'},
     {date:'2026-11-27', title:'«Грехи прошлого» плюс 2'},
     {date:'2026-11-28', title:'Фестиваль «Прощай, осень»'},
 
     {date:'2026-12-05', title:'«Рок Аритмия» — сольный концерт'},
     {date:'2026-12-12', title:'«А312» плюс группа из Самары'},
-    {date:'2026-12-25', title:'Woman Fest'}
+    {date:'2026-12-25', title:'Вумэн Фест'}
   ];
 
   var monthNamesFull = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  var monthNamesGen = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
   var weekdayLabels = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 
   var weekEl = document.getElementById('afishaWeek');
+  var headEl = document.querySelector('.afisha__head');
+  var calToggle = document.getElementById('afishaCalToggle');
   var miniLabelEl = document.getElementById('afishaMiniCalLabel');
   var miniGridEl = document.getElementById('afishaMiniCalGrid');
+  var miniResetBtn = document.getElementById('afishaMiniCalReset');
+  var listEl = document.getElementById('afishaList');
+  var listLabelEl = document.getElementById('afishaListLabel');
+  var listResetBtn = document.getElementById('afishaListReset');
+  var moreBtn = document.getElementById('afishaMore');
+  var mobileQuery = window.matchMedia('(max-width: 760px)');
+
+  var LIST_STEP = 5;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var todayKey = toKey(today);
 
   function toKey(d){
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
+  function fromKey(key){
+    var p = key.split('-');
+    return new Date(+p[0], +p[1]-1, +p[2]);
+  }
   function mondayOf(d){
     var day = d.getDay(); // 0=Вс..6=Сб
-    var diff = (day === 0 ? -6 : 1 - day);
     var m = new Date(d);
-    m.setDate(d.getDate() + diff);
+    m.setDate(d.getDate() + (day === 0 ? -6 : 1 - day));
     m.setHours(0,0,0,0);
     return m;
   }
+  function eventOn(key){
+    return events.find(function(e){ return e.date === key; });
+  }
 
-  var selectedMonday = null;
+  // Состояние: какую неделю показывает лента (десктоп) и с какой даты начинается список (телефон)
+  var selectedMonday = mondayOf(today);
+  var listFromKey = todayKey;
+  var listLimit = LIST_STEP;
+  var miniMonthOffset = 0;
+
+  // Карточка одного дня — общая для ленты недели и списка на телефоне
+  function dayCard(d, ev, weekdayIdx){
+    var key = toKey(d);
+    var isPast = key < todayKey;
+    var cell = document.createElement('div');
+    cell.className = 'afisha__day' + (key === todayKey ? ' afisha__day--today' : '') + (isPast ? ' afisha__day--past' : '');
+    var title = ev
+      ? (ev.poster ? '<a class="afisha__day__link" href="' + ev.poster + '">' + ev.title + '</a>' : ev.title)
+      : '';
+    var bodyHtml = ev
+      ? '<h4>' + title + '</h4>' + (ev.time ? '<time>' + ev.time + '</time>' : '')
+      : '<span class="afisha__day__beer">пивной день</span>';
+    // на событиях с билетами (ev.tickets) вместо брони стола — ссылка на покупку билета
+    var bookHtml = (ev && !isPast)
+      ? (ev.tickets
+          ? '<a class="afisha__book" href="' + ev.tickets + '" target="_blank" rel="noopener">Купить билет</a>'
+          : '<a class="afisha__book" href="#booking" data-date="' + key + '">Забронировать стол</a>')
+      : '';
+    cell.innerHTML =
+      '<div class="afisha__day__date"><b>' + d.getDate() + '</b><span>' + weekdayLabels[weekdayIdx] + '</span></div>' +
+      '<div class="afisha__day__body">' + bodyHtml + '</div>' + bookHtml;
+    return cell;
+  }
 
   function renderWeek(){
-    var today = new Date();
-    var todayKey = toKey(today);
-    var monday = selectedMonday || mondayOf(today);
-
-    var days = [];
-    for (var i = 0; i < 7; i++){
-      var d = new Date(monday);
-      d.setDate(monday.getDate() + i);
-      days.push(d);
-    }
-
     weekEl.innerHTML = '';
-    days.forEach(function(d, i){
-      var key = toKey(d);
-      var ev = events.find(function(e){ return e.date === key; });
-      var isToday = key === todayKey;
-      var cell = document.createElement(ev && ev.poster ? 'a' : 'div');
-      cell.className = 'afisha__day' + (isToday ? ' afisha__day--today' : '');
-      if (ev && ev.poster) cell.href = ev.poster;
+    for (var i = 0; i < 7; i++){
+      var d = new Date(selectedMonday);
+      d.setDate(selectedMonday.getDate() + i);
+      var cell = dayCard(d, eventOn(toKey(d)), i);
       cell.style.animationDelay = (i * 0.05) + 's';
-      var bodyHtml = ev
-        ? '<h4>' + ev.title + '</h4>' + (ev.time ? '<time>' + ev.time + '</time>' : '')
-        : '<span class="afisha__day__beer">пивной день</span>';
-      cell.innerHTML =
-        '<div class="afisha__day__date"><b>' + d.getDate() + '</b><span>' + weekdayLabels[i] + '</span></div>' +
-        '<div class="afisha__day__body">' + bodyHtml + '</div>';
       weekEl.appendChild(cell);
-    });
+    }
     var hint = document.createElement('span');
     hint.className = 'afisha__week__hint';
     hint.setAttribute('aria-hidden', 'true');
     hint.textContent = '›';
     weekEl.appendChild(hint);
+    weekEl.scrollLeft = 0;
     updateWeekHint();
   }
 
@@ -713,21 +797,37 @@
   weekEl.addEventListener('scroll', updateWeekHint, { passive: true });
   window.addEventListener('resize', updateWeekHint);
 
-  var miniMonthOffset = 0;
-  var miniPrevBtn = document.getElementById('afishaMiniCalPrev');
-  var miniNextBtn = document.getElementById('afishaMiniCalNext');
+  // Телефон: только дни с событиями, начиная с сегодня (или с выбранной в календаре даты)
+  function renderList(){
+    var upcoming = events.filter(function(e){ return e.date >= listFromKey; });
+    listEl.innerHTML = '';
+    upcoming.slice(0, listLimit).forEach(function(ev){
+      var d = fromKey(ev.date);
+      listEl.appendChild(dayCard(d, ev, (d.getDay() + 6) % 7));
+    });
+    if (!upcoming.length){
+      listEl.innerHTML = '<p class="afisha__list__empty">Дальше в афише пока пусто — приходи в пивной день или уточни расписание в баре.</p>';
+    }
+    moreBtn.hidden = upcoming.length <= listLimit;
+
+    var isFromToday = listFromKey === todayKey;
+    var from = fromKey(listFromKey);
+    listLabelEl.textContent = isFromToday ? 'Ближайшие события' : 'События с ' + from.getDate() + ' ' + monthNamesGen[from.getMonth()];
+    listResetBtn.hidden = isFromToday;
+  }
 
   function renderMiniCal(){
-    var today = new Date();
-    var todayKey = toKey(today);
     var base = new Date(today.getFullYear(), today.getMonth() + miniMonthOffset, 1);
     var year = base.getFullYear(), month = base.getMonth();
-
     miniLabelEl.textContent = monthNamesFull[month] + ' ' + year;
 
-    var firstDay = new Date(year, month, 1);
-    var startOffset = (firstDay.getDay() + 6) % 7; // Пн = 0
+    var startOffset = (base.getDay() + 6) % 7; // Пн = 0
     var totalDays = new Date(year, month + 1, 0).getDate();
+    var weekStart = toKey(selectedMonday);
+    var weekEndDate = new Date(selectedMonday); weekEndDate.setDate(weekEndDate.getDate() + 6);
+    var weekEnd = toKey(weekEndDate);
+    // на телефоне подсвечиваем выбранную дату, на компьютере — выбранную неделю
+    var isMobile = mobileQuery.matches;
 
     miniGridEl.innerHTML = '';
     weekdayLabels.forEach(function(w){
@@ -741,34 +841,77 @@
       pad.className = 'is-pad';
       miniGridEl.appendChild(pad);
     }
-    for (var d = 1; d <= totalDays; d++){
-      var dateObj = new Date(year, month, d);
+    for (var day = 1; day <= totalDays; day++){
+      var dateObj = new Date(year, month, day);
       var key = toKey(dateObj);
-      var hasEvent = events.some(function(e){ return e.date === key; });
-      var cell = document.createElement('span');
-      var cls = ['is-clickable'];
+      var ev = eventOn(key);
+      var cell = document.createElement('button');
+      cell.type = 'button';
+      var cls = [];
+      if (key < todayKey) cls.push('is-past');
+      if (ev) cls.push('is-event');
+      if (isMobile ? (key === listFromKey && key !== todayKey) : (key >= weekStart && key <= weekEnd)) cls.push('is-week');
       if (key === todayKey) cls.push('is-today');
-      if (hasEvent) cls.push('is-event');
       cell.className = cls.join(' ');
-      cell.textContent = d;
-      var jumpToDay = function(dateObj){
-        return function(){
-          selectedMonday = mondayOf(dateObj);
-          renderWeek();
-        };
-      }(dateObj);
-      cell.addEventListener('mouseenter', jumpToDay);
-      cell.addEventListener('click', jumpToDay);
+      cell.textContent = day;
+      cell.setAttribute('aria-label', day + ' ' + monthNamesGen[month] + (ev ? ': ' + ev.title : ''));
+      cell.addEventListener('click', (function(dateObj){
+        return function(){ selectDate(dateObj); };
+      })(dateObj));
       miniGridEl.appendChild(cell);
     }
+
+    var isCurrent = miniMonthOffset === 0 && toKey(selectedMonday) === toKey(mondayOf(today)) && listFromKey === todayKey;
+    miniResetBtn.hidden = isCurrent;
   }
 
-  miniPrevBtn.addEventListener('click', function(){ miniMonthOffset -= 1; renderMiniCal(); });
-  miniNextBtn.addEventListener('click', function(){ miniMonthOffset += 1; renderMiniCal(); });
+  function selectDate(dateObj){
+    selectedMonday = mondayOf(dateObj);
+    var key = toKey(dateObj);
+    listFromKey = key < todayKey ? todayKey : key;
+    listLimit = LIST_STEP;
+    renderWeek();
+    renderList();
+    renderMiniCal();
+    if (mobileQuery.matches) setCalOpen(false);
+  }
+
+  function resetToToday(){
+    miniMonthOffset = 0;
+    selectDate(today);
+  }
+
+  function setCalOpen(open){
+    headEl.classList.toggle('is-cal-open', open);
+    calToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    calToggle.textContent = open ? 'Скрыть календарь' : 'Весь месяц';
+  }
+
+  document.getElementById('afishaMiniCalPrev').addEventListener('click', function(){ miniMonthOffset -= 1; renderMiniCal(); });
+  document.getElementById('afishaMiniCalNext').addEventListener('click', function(){ miniMonthOffset += 1; renderMiniCal(); });
+  miniResetBtn.addEventListener('click', resetToToday);
+  listResetBtn.addEventListener('click', resetToToday);
+  moreBtn.addEventListener('click', function(){ listLimit += LIST_STEP; renderList(); });
+  calToggle.addEventListener('click', function(){ setCalOpen(!headEl.classList.contains('is-cal-open')); });
+  mobileQuery.addEventListener('change', renderMiniCal);
+
+  // Кнопка «Забронировать стол» в карточке: подставляем дату события в форму брони
+  var bookDateInput = document.getElementById('bf-date');
+  var bookNameInput = document.getElementById('bf-name');
+  if (bookDateInput) bookDateInput.min = todayKey;
+  document.getElementById('afisha').addEventListener('click', function(e){
+    var btn = e.target.closest('.afisha__book');
+    if (!btn || !btn.dataset.date || !bookDateInput) return;
+    e.preventDefault();
+    bookDateInput.value = btn.dataset.date;
+    // ведём сразу к форме, а не к заголовку раздела — на телефоне форма ниже экрана
+    bookDateInput.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function(){ bookNameInput.focus({ preventScroll: true }); }, 700);
+  });
 
   renderWeek();
+  renderList();
   renderMiniCal();
-  render();
 })();
 </script>
 </body>
