@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Меркурий-Фест — Триггер Бар</title>
-<meta name="description" content="24 сентября, 19:00–23:00 — Меркурий-Фест: Блямберы, Дед Вангуй бэнд, НАРКОМАТ, Агент СмиД и свободный микрофон в Триггер Баре. Вход бесплатный.">
+<title>Триггеровчане — Триггер Бар</title>
+<meta name="description" content="Постоянные гости Триггер Бара — их фото и истории про подарки бару. Скоро здесь появятся первые истории.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='31' fill='%23141414' stroke='%23d89a1e' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='34' fill='%23d89a1e' text-anchor='middle'%3EТ%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,15 +12,15 @@
 <link rel="stylesheet" href="assets/style.css?v=72">
 <style>
   .legal{ padding:150px 0 100px; }
-  .legal__head{ max-width:720px; margin-bottom:40px; }
+  .legal__head{ max-width:720px; margin-bottom:0; }
   .legal__head h1{ font-size:clamp(2rem, 4vw, 2.8rem); margin-top:14px; }
   .legal__head p{ margin-top:16px; color:var(--paper-dim); }
-  .legal__back{ margin-top:40px; }
-  .event-poster{ max-width:420px; }
-  .event-poster img{
-    width:100%; display:block; border-radius:10px; border:1px solid var(--line);
-    box-shadow:0 30px 40px rgba(0,0,0,.55);
+  .soon{
+    max-width:720px; margin-top:56px; padding:44px; text-align:center;
+    background:var(--ink-2); border:1px dashed var(--line); border-radius:10px;
   }
+  .soon__icon{ font-family:var(--font-display); font-size:2.4rem; color:var(--gold-bright); }
+  .soon p{ margin-top:14px; color:var(--paper-dim); max-width:48ch; margin-inline:auto; }
 </style>
 </head>
 <body>
@@ -35,7 +35,7 @@
       <a href="index.html#afisha">Афиша</a>
       <a href="menu.html">Меню бара</a>
       <a href="rider.html">Технический райдер</a>
-        <a href="triggerovchane.html">Триггеровчане</a>
+      <a href="triggerovchane.html" class="is-active">Триггеровчане</a>
       <a href="index.html#contacts">Контакты</a>
       <a href="index.html#booking" class="btn btn--sm">Забронировать стол</a>
     </nav>
@@ -46,14 +46,14 @@
 <main class="legal">
   <div class="container">
     <div class="legal__head">
-      <span class="eyebrow">24 сентября · 19:00–23:00</span>
-      <h1>Меркурий-Фест</h1>
-      <p>Пять составов за один вечер: Блямберы, Дед Вангуй бэнд, НАРКОМАТ, Агент СмиД и открытый микрофон в финале. Вход бесплатный.</p>
+      <span class="eyebrow">Наши люди</span>
+      <h1>Триггеровчане</h1>
+      <p>Здесь будут фото постоянных гостей бара и истории про их подарки Триггеру.</p>
     </div>
-    <div class="event-poster">
-      <img src="assets/poster-merkuriy-fest.webp" alt="Меркурий-Фест, 24.09.26, Триггер Бар, вход бесплатный">
+    <div class="soon">
+      <span class="soon__icon">★</span>
+      <p>Скоро здесь появятся первые истории и фото наших постоянных гостей.</p>
     </div>
-    <a href="index.html#booking" class="btn legal__back">Забронировать стол</a>
   </div>
 </main>
 

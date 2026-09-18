@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=64">
+<link rel="stylesheet" href="assets/style.css?v=72">
 <style>
   /* ---------- hero (картинка на весь экран, без текста) ---------- */
   .hero{
@@ -171,33 +171,78 @@
     display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:52px;
   }
   .afisha__head h2{ font-size:clamp(2rem, 4vw, 2.9rem); margin-top:14px; }
-  .afisha__tabs{ display:flex; flex-wrap:wrap; gap:10px; }
-  .afisha__tabs button{
-    padding:10px 20px; min-width:120px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--paper-dim);
-    font-weight:700; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; text-align:center; cursor:pointer;
-    transition:all .2s ease;
-  }
-  .afisha__tabs button.is-active, .afisha__tabs button:hover{ background:var(--accent); color:var(--paper); border-color:var(--accent); }
 
-  .afisha__grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:22px; }
-  .event-card{
-    display:flex; gap:18px; background:var(--ink); border:1px solid var(--line); border-radius:8px; padding:20px;
-    transition:transform .2s ease, border-color .2s ease;
-    opacity:0; transform:translateY(16px); animation:cardIn .5s ease forwards;
-    text-decoration:none;
+  /* мини-календарь месяца, справа в шапке афиши */
+  .afisha__minical{
+    background:var(--ink); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    width:230px;
   }
-  .event-card:hover{ transform:translateY(-4px) rotate(-.6deg); border-color:var(--gold-dim); }
+  .afisha__minical__head{ display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:10px; }
+  .afisha__minical__nav{
+    flex:none; width:22px; height:22px; border-radius:5px; border:1px solid var(--line); background:transparent; color:var(--paper-dim);
+    font-size:.9rem; line-height:1; cursor:pointer; transition:all .2s ease;
+  }
+  .afisha__minical__nav:hover{ background:var(--accent); border-color:var(--accent); color:var(--paper); }
+  .afisha__minical__label{
+    text-align:center; font-weight:700; font-size:.76rem; letter-spacing:.03em; color:var(--paper-dim);
+  }
+  .afisha__minical__grid{ display:grid; grid-template-columns:repeat(7, 1fr); gap:2px; }
+  .afisha__minical__grid span{
+    display:flex; align-items:center; justify-content:center; aspect-ratio:1; border-radius:50%;
+    font-size:.66rem; color:var(--paper-dim);
+  }
+  .afisha__minical__grid span.is-clickable{ cursor:pointer; transition:background .15s ease, color .15s ease; }
+  .afisha__minical__grid span.is-clickable:hover{ background:var(--accent); color:var(--paper); }
+  .afisha__minical__grid span.is-event{ color:var(--gold-bright); font-weight:700; }
+  .afisha__minical__grid span.is-head{ color:var(--gold-dim); font-weight:700; font-size:.6rem; }
+  .afisha__minical__grid span.is-pad{ visibility:hidden; }
+  .afisha__minical__grid span.is-today{ background:var(--gold); color:var(--ink); font-weight:700; }
+
+  .afisha__week{
+    display:flex; gap:14px; overflow-x:auto; padding-bottom:10px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .afisha__day{
+    display:flex; flex-direction:column; gap:14px; background:var(--ink); border:1px solid var(--line); border-radius:8px; padding:16px;
+    flex:0 0 190px; min-height:180px; min-width:0; text-decoration:none; transition:transform .2s ease, border-color .2s ease;
+    opacity:0; transform:translateY(16px); animation:cardIn .5s ease forwards; scroll-snap-align:start;
+  }
+  .afisha__day--today{ border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
+  a.afisha__day:hover{ transform:translateY(-4px); border-color:var(--gold-dim); }
   @keyframes cardIn{ to{ opacity:1; transform:translateY(0); } }
-  .event-card__date{
-    flex:none; width:64px; height:64px; border-radius:6px; background:var(--accent); color:var(--paper);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1;
+  .afisha__day__date{
+    flex:none; display:flex; align-items:baseline; gap:6px; line-height:1;
+    font-family:var(--font-display); font-weight:400;
   }
-  .event-card__date b{ font-family:var(--font-display); font-weight:400; font-size:1.5rem; }
-  .event-card__date span{ font-size:.62rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin-top:2px; }
-  .event-card__body h4{ font-family:var(--font-body); font-weight:700; font-size:.98rem; text-transform:none; color:var(--paper); line-height:1.3; }
-  .event-card__body time{ display:block; margin-top:8px; font-size:.78rem; color:var(--accent-bright); font-weight:700; letter-spacing:.03em; }
-  .afisha__empty{ color:var(--paper-dim); font-size:.95rem; padding:20px 4px; }
+  .afisha__day__date b{ font-size:1.6rem; color:var(--paper); }
+  .afisha__day--today .afisha__day__date b{ color:var(--gold-bright); }
+  .afisha__day__date span{ font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; font-weight:700; color:var(--paper-dim); font-family:var(--font-body); }
+  .afisha__day__body{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; min-width:0; }
+  .afisha__day__body h4{ font-family:var(--font-body); font-weight:700; font-size:.86rem; text-transform:none; color:var(--paper); line-height:1.3; }
+  .afisha__day__body time{ display:block; margin-top:8px; font-size:.72rem; color:var(--accent-bright); font-weight:700; letter-spacing:.03em; }
+  .afisha__day__beer{
+    font-family:var(--font-hand); font-weight:400; font-style:italic; font-size:1.3rem;
+    color:var(--gold-dim); transform:rotate(-3deg); display:inline-block;
+  }
   .afisha__foot{ margin-top:34px; font-size:.86rem; color:var(--paper-dim); }
+  .afisha__week__hint{
+    position:sticky; right:6px; flex:none; align-self:center; margin-left:-6px;
+    width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:rgba(13,13,12,.9); border:1px solid var(--line); color:var(--gold-bright);
+    font-size:1.3rem; line-height:1; pointer-events:none;
+    opacity:1; transition:opacity .25s ease; animation:afishaWeekHint 1.8s ease-in-out infinite;
+  }
+  .afisha__week.is-end .afisha__week__hint{ opacity:0; }
+  @keyframes afishaWeekHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+
+  @media (max-width: 760px){
+    .afisha__head{ align-items:flex-start; }
+    .afisha__minical{ width:100%; }
+  }
+  @media (max-width: 480px){
+    .afisha__day{ min-height:0; flex-direction:row; align-items:center; flex-basis:260px; }
+    .afisha__day__date{ flex-direction:column; align-items:flex-start; gap:0; }
+  }
 
   /* ---------- booking ---------- */
   .booking{ padding:140px 0 130px; background:var(--ink); }
@@ -264,6 +309,13 @@
   .contacts__phone:hover{ color:var(--gold); }
   .contacts__address{ margin-top:10px !important; color:var(--paper-dim); font-size:.92rem; }
   .contacts__hours{ margin-top:6px !important; color:var(--paper-dim); font-size:.92rem; }
+  .contacts__social{ display:flex; gap:10px; margin-top:18px; }
+  .contacts__social a{
+    padding:8px 16px; border:1px solid var(--line); border-radius:8px;
+    font-weight:700; font-size:.78rem; letter-spacing:.04em; color:var(--paper-dim);
+    transition:all .2s ease;
+  }
+  .contacts__social a:hover{ color:var(--paper); border-color:var(--gold-dim); }
   .contacts__map{
     margin-top:30px; border-radius:10px; overflow:hidden; border:1px solid var(--line);
     aspect-ratio:16/11; background:var(--ink);
@@ -304,19 +356,19 @@
     <nav class="nav__links">
       <a href="#about">О баре</a>
       <a href="#afisha">Афиша</a>
-      <a href="menu.html">Меню</a>
+      <a href="menu.html">Меню бара</a>
       <a href="rider.html">Технический райдер</a>
+        <a href="triggerovchane.html">Триггеровчане</a>
       <a href="#contacts">Контакты</a>
-      <a href="tel:+79268284232" class="nav__phone">+7 926 828-42-32</a>
       <a href="#booking" class="btn btn--sm">Забронировать стол</a>
     </nav>
-    <button class="nav__burger" aria-label="Открыть меню"><span></span></button>
+    <button type="button" class="nav__menu-btn">Меню</button>
   </div>
 </header>
 
 <section class="hero" id="top">
   <div class="hero__bg-wrap">
-    <img class="hero__bg" src="assets/hero-sign.jpg?v=2" alt="Фасад Триггер Бар с вывеской">
+    <img class="hero__bg" src="assets/hero-sign.jpg?v=4" alt="Фасад Триггер Бар с вывеской">
   </div>
   <div class="hero__scrim"></div>
   <a href="#intro" class="hero__scroll"><i></i></a>
@@ -324,8 +376,8 @@
 
 <div class="marquee">
   <div class="marquee__track">
-    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
-    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Домашние настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
+    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Авторские настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
+    <span>Живая музыка</span><span>Крафтовое пиво</span><span>Авторские настойки</span><span>Концерты каждую неделю</span><span>Есть караоке</span>
   </div>
 </div>
 
@@ -380,7 +432,7 @@
       <div class="about__row reveal">
         <div class="about__row__art">
           <img src="assets/bartender.webp?v=7" alt="Настойки собственного производства">
-          <span class="about__row__tag about__row__tag--home">домашние</span>
+          <span class="about__row__tag about__row__tag--home">авторские</span>
         </div>
         <div class="about__row__text">
           <h3>Настойки собственного производства</h3>
@@ -399,9 +451,16 @@
         <span class="eyebrow">Не пропусти</span>
         <h2>Афиша</h2>
       </div>
-      <div class="afisha__tabs" id="afishaTabs"></div>
+      <div class="afisha__minical">
+        <div class="afisha__minical__head">
+          <button type="button" class="afisha__minical__nav" id="afishaMiniCalPrev" aria-label="Предыдущий месяц">‹</button>
+          <span class="afisha__minical__label" id="afishaMiniCalLabel"></span>
+          <button type="button" class="afisha__minical__nav" id="afishaMiniCalNext" aria-label="Следующий месяц">›</button>
+        </div>
+        <div class="afisha__minical__grid" id="afishaMiniCalGrid"></div>
+      </div>
     </div>
-    <div class="afisha__grid" id="afishaGrid"></div>
+    <div class="afisha__week" id="afishaWeek"></div>
     <p class="afisha__foot">Расписание обновляется каждую неделю — если группы, которую ты ищешь, здесь ещё нет, уточни в баре.</p>
   </div>
 </section>
@@ -449,9 +508,9 @@
         <label for="bf-contact">Удобный способ связи</label>
         <select id="bf-contact" name="contact">
           <option value="phone">Позвонить</option>
-          <option value="telegram">Telegram</option>
-          <option value="whatsapp">WhatsApp</option>
-          <option value="max">MAX</option>
+          <option value="telegram">Телеграм</option>
+          <option value="whatsapp">Ватсап</option>
+          <option value="max">Макс</option>
         </select>
       </div>
       <label class="field-check">
@@ -472,7 +531,11 @@
       <p>Звони, если хочешь уточнить бронь, узнать про мероприятие или просто спросить, что сегодня играет.</p>
       <a href="tel:+79268284232" class="contacts__phone">+7 926 828-42-32</a>
       <p class="contacts__address">Варшавское шоссе, 45<br>м. Нагатинская</p>
-      <p class="contacts__hours">Пн–Чт 16:00–00:00 · Пт–Сб 16:00–01:00 · Вс 16:00–23:00</p>
+      <p class="contacts__hours">Вс–Чт 16:00–23:00 · Пт–Сб 16:00–01:00</p>
+      <div class="contacts__social">
+        <a href="https://vk.ru/album603019000_289678424" target="_blank" rel="noopener">ВК</a>
+        <a href="https://max.ru/join/8JCnCGkVBYRScVjnmRXrf-MTughIcWswcX2mhra3-Nc" target="_blank" rel="noopener">МАХ</a>
+      </div>
       <div class="contacts__map">
         <iframe src="https://yandex.ru/map-widget/v1/?ll=37.6252991%2C55.6800044&z=17&l=map&pt=37.6252991,55.6800044,pm2rdm" loading="lazy" title="Триггер Бар на карте"></iframe>
       </div>
@@ -485,8 +548,8 @@
         <input id="cf-name" name="name" type="text" placeholder="Как к вам обращаться" required>
       </div>
       <div class="field">
-        <label for="cf-contact">Телефон или e-mail</label>
-        <input id="cf-contact" name="contact" type="text" placeholder="Телефон или e-mail" required>
+        <label for="cf-contact">Телефон или эл. почта</label>
+        <input id="cf-contact" name="contact" type="text" placeholder="Телефон или эл. почта" required>
       </div>
       <div class="field">
         <label for="cf-message">Сообщение</label>
@@ -511,18 +574,18 @@
       <div class="footer__col">
         <h4>Адрес</h4>
         <p>Варшавское шоссе, 45<br>м. Нагатинская</p>
-        <a href="tel:+79268284232">+7 926 828-42-32</a>
       </div>
       <div class="footer__col">
         <h4>Часы работы</h4>
-        <p>Пн–Чт 16:00–00:00<br>Пт–Сб 16:00–01:00<br>Вс 16:00–23:00</p>
+        <p>Вс–Чт 16:00–23:00<br>Пт–Сб 16:00–01:00</p>
       </div>
       <div class="footer__col">
         <h4>Навигация</h4>
         <a href="#about">О баре</a>
         <a href="#afisha">Афиша</a>
-        <a href="menu.html">Меню</a>
+        <a href="menu.html">Меню бара</a>
         <a href="rider.html">Технический райдер</a>
+        <a href="triggerovchane.html">Триггеровчане</a>
       </div>
       <div class="footer__col">
         <h4>Бронь</h4>
@@ -531,8 +594,9 @@
     </div>
     <div class="footer__bottom">
       <span>© Триггер Бар</span>
-      <span>Живой рок-н-ролл, крафтовое пиво, домашние настойки</span>
+      <span>Живой рок-н-ролл, крафтовое пиво, авторские настойки</span>
       <a href="privacy.html">Политика конфиденциальности</a>
+      <span class="footer__age">18+</span>
     </div>
   </div>
 </footer>
@@ -541,8 +605,8 @@
 <script>
 (function(){
   var events = [
-    {date:'2026-09-17', title:'Dream Day — Green Day Tribute', time:'20:00', poster:'event-dream-day.html'},
-    {date:'2026-09-18', title:'Trigger Rock Fest — Ульяна Петраш, Bartezz', time:'19:00', poster:'event-trigger-rock-fest.html'},
+    {date:'2026-09-17', title:'Дрим Дэй — трибьют Грин Дэй', time:'20:00', poster:'event-dream-day.html'},
+    {date:'2026-09-18', title:'Триггер Рок Фест — Ульяна Петраш, Бартезз', time:'19:00', poster:'event-trigger-rock-fest.html'},
     {date:'2026-09-19', title:'Костёр — Арт-Пикник, день 1', time:'16:00–01:00', poster:'event-koster-19.html'},
     {date:'2026-09-20', title:'Костёр — Арт-Пикник, день 2', time:'16:00–23:00', poster:'event-koster-20.html'},
     {date:'2026-09-24', title:'Меркурий-Фест', time:'19:00–23:00', poster:'event-merkuriy-fest.html'},
@@ -584,48 +648,126 @@
     {date:'2026-12-25', title:'Woman Fest'}
   ];
 
-  var months = [
-    {key:'2026-09', label:'Сентябрь'},
-    {key:'2026-10', label:'Октябрь'},
-    {key:'2026-11', label:'Ноябрь'},
-    {key:'2026-12', label:'Декабрь'}
-  ];
-  var monthNamesShort = {'09':'сен','10':'окт','11':'ноя','12':'дек'};
+  var monthNamesFull = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  var weekdayLabels = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 
-  var tabsEl = document.getElementById('afishaTabs');
-  var gridEl = document.getElementById('afishaGrid');
-  var current = months[0].key;
+  var weekEl = document.getElementById('afishaWeek');
+  var miniLabelEl = document.getElementById('afishaMiniCalLabel');
+  var miniGridEl = document.getElementById('afishaMiniCalGrid');
 
-  function render(){
-    tabsEl.innerHTML = '';
-    months.forEach(function(m){
-      var b = document.createElement('button');
-      b.textContent = m.label;
-      b.type = 'button';
-      if (m.key === current) b.classList.add('is-active');
-      b.addEventListener('click', function(){ current = m.key; render(); });
-      tabsEl.appendChild(b);
-    });
-
-    var list = events.filter(function(ev){ return ev.date.slice(0,7) === current; });
-    gridEl.innerHTML = '';
-    if (!list.length){
-      gridEl.innerHTML = '<p class="afisha__empty">В этом месяце афиша ещё уточняется.</p>';
-      return;
-    }
-    list.forEach(function(ev, i){
-      var day = ev.date.slice(8,10);
-      var mon = monthNamesShort[ev.date.slice(5,7)];
-      var card = document.createElement(ev.poster ? 'a' : 'article');
-      card.className = 'event-card';
-      if (ev.poster) card.href = ev.poster;
-      card.style.animationDelay = (Math.min(i, 10) * 0.05) + 's';
-      card.innerHTML =
-        '<div class="event-card__date"><b>' + day + '</b><span>' + mon + '</span></div>' +
-        '<div class="event-card__body"><h4>' + ev.title + '</h4>' + (ev.time ? '<time>' + ev.time + '</time>' : '') + '</div>';
-      gridEl.appendChild(card);
-    });
+  function toKey(d){
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
+  function mondayOf(d){
+    var day = d.getDay(); // 0=Вс..6=Сб
+    var diff = (day === 0 ? -6 : 1 - day);
+    var m = new Date(d);
+    m.setDate(d.getDate() + diff);
+    m.setHours(0,0,0,0);
+    return m;
+  }
+
+  var selectedMonday = null;
+
+  function renderWeek(){
+    var today = new Date();
+    var todayKey = toKey(today);
+    var monday = selectedMonday || mondayOf(today);
+
+    var days = [];
+    for (var i = 0; i < 7; i++){
+      var d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      days.push(d);
+    }
+
+    weekEl.innerHTML = '';
+    days.forEach(function(d, i){
+      var key = toKey(d);
+      var ev = events.find(function(e){ return e.date === key; });
+      var isToday = key === todayKey;
+      var cell = document.createElement(ev && ev.poster ? 'a' : 'div');
+      cell.className = 'afisha__day' + (isToday ? ' afisha__day--today' : '');
+      if (ev && ev.poster) cell.href = ev.poster;
+      cell.style.animationDelay = (i * 0.05) + 's';
+      var bodyHtml = ev
+        ? '<h4>' + ev.title + '</h4>' + (ev.time ? '<time>' + ev.time + '</time>' : '')
+        : '<span class="afisha__day__beer">пивной день</span>';
+      cell.innerHTML =
+        '<div class="afisha__day__date"><b>' + d.getDate() + '</b><span>' + weekdayLabels[i] + '</span></div>' +
+        '<div class="afisha__day__body">' + bodyHtml + '</div>';
+      weekEl.appendChild(cell);
+    });
+    var hint = document.createElement('span');
+    hint.className = 'afisha__week__hint';
+    hint.setAttribute('aria-hidden', 'true');
+    hint.textContent = '›';
+    weekEl.appendChild(hint);
+    updateWeekHint();
+  }
+
+  function updateWeekHint(){
+    var atEnd = weekEl.scrollLeft + weekEl.clientWidth >= weekEl.scrollWidth - 4;
+    weekEl.classList.toggle('is-end', atEnd);
+  }
+  weekEl.addEventListener('scroll', updateWeekHint, { passive: true });
+  window.addEventListener('resize', updateWeekHint);
+
+  var miniMonthOffset = 0;
+  var miniPrevBtn = document.getElementById('afishaMiniCalPrev');
+  var miniNextBtn = document.getElementById('afishaMiniCalNext');
+
+  function renderMiniCal(){
+    var today = new Date();
+    var todayKey = toKey(today);
+    var base = new Date(today.getFullYear(), today.getMonth() + miniMonthOffset, 1);
+    var year = base.getFullYear(), month = base.getMonth();
+
+    miniLabelEl.textContent = monthNamesFull[month] + ' ' + year;
+
+    var firstDay = new Date(year, month, 1);
+    var startOffset = (firstDay.getDay() + 6) % 7; // Пн = 0
+    var totalDays = new Date(year, month + 1, 0).getDate();
+
+    miniGridEl.innerHTML = '';
+    weekdayLabels.forEach(function(w){
+      var head = document.createElement('span');
+      head.className = 'is-head';
+      head.textContent = w;
+      miniGridEl.appendChild(head);
+    });
+    for (var p = 0; p < startOffset; p++){
+      var pad = document.createElement('span');
+      pad.className = 'is-pad';
+      miniGridEl.appendChild(pad);
+    }
+    for (var d = 1; d <= totalDays; d++){
+      var dateObj = new Date(year, month, d);
+      var key = toKey(dateObj);
+      var hasEvent = events.some(function(e){ return e.date === key; });
+      var cell = document.createElement('span');
+      var cls = ['is-clickable'];
+      if (key === todayKey) cls.push('is-today');
+      if (hasEvent) cls.push('is-event');
+      cell.className = cls.join(' ');
+      cell.textContent = d;
+      var jumpToDay = function(dateObj){
+        return function(){
+          selectedMonday = mondayOf(dateObj);
+          renderWeek();
+        };
+      }(dateObj);
+      cell.addEventListener('mouseenter', jumpToDay);
+      cell.addEventListener('click', jumpToDay);
+      miniGridEl.appendChild(cell);
+    }
+  }
+
+  miniPrevBtn.addEventListener('click', function(){ miniMonthOffset -= 1; renderMiniCal(); });
+  miniNextBtn.addEventListener('click', function(){ miniMonthOffset += 1; renderMiniCal(); });
+
+  renderWeek();
+  renderMiniCal();
   render();
 })();
 </script>

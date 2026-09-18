@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=64">
+<link rel="stylesheet" href="assets/style.css?v=72">
 <style>
   .menu-hero{
     position:relative; z-index:1; padding:170px 0 110px; overflow:hidden; text-align:center;
@@ -126,6 +126,9 @@
   .menu-flavors span{
     padding:8px 14px; border-radius:8px; border:1px solid var(--line); font-size:.82rem; color:var(--paper-dim);
   }
+  .menu-tea-list{ list-style:none; padding:0; margin:0; max-width:420px; }
+  .menu-tea-list li{ padding:12px 0; border-bottom:1px dashed var(--line); color:var(--paper-dim); font-size:.94rem; }
+  .menu-tea-list li:last-child{ border-bottom:none; }
   .menu-price-tiers{ display:flex; gap:14px; flex-wrap:wrap; }
   .menu-price-tiers div{
     background:var(--ink-2); border:1px solid var(--line); border-radius:6px; padding:16px 22px; text-align:center;
@@ -187,13 +190,13 @@
     <nav class="nav__links">
       <a href="index.html#about">О баре</a>
       <a href="index.html#afisha">Афиша</a>
-      <a href="menu.html" class="is-active">Меню</a>
+      <a href="menu.html" class="is-active">Меню бара</a>
       <a href="rider.html">Технический райдер</a>
+        <a href="triggerovchane.html">Триггеровчане</a>
       <a href="index.html#contacts">Контакты</a>
-      <a href="tel:+79268284232" class="nav__phone">+7 926 828-42-32</a>
       <a href="index.html#booking" class="btn btn--sm">Забронировать стол</a>
     </nav>
-    <button class="nav__burger" aria-label="Открыть меню"><span></span></button>
+    <button type="button" class="nav__menu-btn">Меню</button>
   </div>
 </header>
 
@@ -233,6 +236,7 @@
     <a href="#burgers">Бургеры</a>
     <a href="#hot">Горячее</a>
     <a href="#salads">Салаты</a>
+    <a href="#pod-vodochku">Под водочку</a>
     <a href="#snacks">Закуски</a>
     <a href="#coffee">Кофе и чай</a>
     <a href="#desserts">Десерты</a>
@@ -252,14 +256,18 @@
       <div class="menu-section__head"><h2>Пиво</h2><span></span></div>
       <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Фирменный лагер 4,3%</span><span class="menu-item__desc">классический лёгкий лагер</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 / 3000 мл (банка)</span><span class="menu-item__price">400 / 500 / 1500 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">ИПА «Атомная прачечная» 7,0%</span><span class="menu-item__desc">тропические фрукты, цитрус, хвоя</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 750 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Пилснер 4,2–4,5%</span><span class="menu-item__desc">премиальный солод, лёгкая горчинка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">450 / 600 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Хеллес Мулттаун 4,0–4,6%</span><span class="menu-item__desc">насыщенный лагер с сильным послевкусием</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">450 / 600 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Пшеничный нефильтр 4,2–4,6%</span><span class="menu-item__desc">лёгкий пшеничный лагер</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">500 / 650 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Блэк Шип Паб Лагер 4,0%</span><span class="menu-item__desc">азотное пиво в ирландском стиле, светлое</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">450 / 600 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">American Pale Ale 4,5%</span><span class="menu-item__desc">эль с лёгкой горчинкой и выраженным ароматом</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Американ Пейл Эль 4,5%</span><span class="menu-item__desc">эль с лёгкой горчинкой и выраженным ароматом</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Кислое течение 4,2%</span><span class="menu-item__desc">гуава/маракуйя/лемонграсс или брусника — кислый эль</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Jaws</span><span class="menu-item__desc">ж/банка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">500 мл</span><span class="menu-item__price">550 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">La Costa Fresca 4,1%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">250 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Джоуз</span><span class="menu-item__desc">ж/банка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">500 мл</span><span class="menu-item__price">550 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Ла Коста Фреска 4,1%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">250 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Бутылка импорт</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__price">900 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Безалкогольное пиво: Крушовице</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Безалкогольное пиво: Стаут / Саур / Бланш / Фрутбир</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">350 ₽</span></div></div>
       </div>
     </section>
 
@@ -267,12 +275,11 @@
       <div class="menu-section__head"><h2>Тёмное и крафтовое</h2><span></span></div>
       <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Блэк Шип Айриш Стаут 4,0%</span><span class="menu-item__desc">азотное пиво в ирландском стиле, тёмное</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">450 / 600 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Oatmeal Stout, овсяный стаут 5,5%</span><span class="menu-item__desc">нейтральный, бархатный вкус, сварен с овсом</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Milk Stout, молочный стаут 7,5%</span><span class="menu-item__desc">шоколадные, кофейные и карамельные оттенки</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Оутмил Стаут, овсяный стаут 5,5%</span><span class="menu-item__desc">нейтральный, бархатный вкус, сварен с овсом</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Милк Стаут, молочный стаут 7,5%</span><span class="menu-item__desc">шоколадные, кофейные и карамельные оттенки</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Портер 7,6%</span><span class="menu-item__desc">классический тёмный стаут</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Черри-Риш 4,5%</span><span class="menu-item__desc">классический вишнёвый лагер</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Красный Кот 5,0%</span><span class="menu-item__desc">красное пиво в ирландском стиле</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">450 / 600 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">ИПА «Атомная прачечная» 7,0%</span><span class="menu-item__desc">тропические фрукты, цитрус, хвоя</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 750 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">ДИПА «Медуза» 8,5%</span><span class="menu-item__desc">двойная ИПА, дикий хмель, перец, дыня, папайя, абрикос</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 / 600 мл</span><span class="menu-item__price">550 / 700 ₽</span></div></div>
       </div>
     </section>
@@ -281,11 +288,11 @@
       <div class="menu-section__head"><h2>Сидр, дегустация и снеки</h2><span></span></div>
       <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Дегустационный пивной сет</span><span class="menu-item__desc">три вида пива на выбор, 3×100 мл</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__price">300 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Сидр «Яблочный Лис» 5,5%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Сидр «Вишнёвый Лис» 5,5%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Сидр яблочный «Мистер Лис» 5,5%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Сидр вишнёвый «Мистер Лис» 5,5%</span><span class="menu-item__desc">бутылка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Триггер яблочный/вишнёвый сидр с корицей 5%</span><span class="menu-item__desc">горячий, на розлив</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 мл</span><span class="menu-item__price">450 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Фисташки</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">80 г</span><span class="menu-item__price">350 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Куриные ломтики</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">50 г</span><span class="menu-item__price">370 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Куриные ломтики</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">70 г</span><span class="menu-item__price">370 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Ломтики кабана</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">50 г</span><span class="menu-item__price">380 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Сыр косичка</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">100 г</span><span class="menu-item__price">390 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Солёный арахис</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">80 г</span><span class="menu-item__price">300 ₽</span></div></div>
@@ -319,13 +326,19 @@
     </section>
 
     <section class="menu-section" id="salads">
-      <div class="menu-section__head"><h2>Салаты и под водочку</h2><span></span></div>
+      <div class="menu-section__head"><h2>Салаты</h2><span></span></div>
       <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Овощной салат</span><span class="menu-item__desc">огурцы, помидоры, красный лук, заправка на выбор</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">200 г</span><span class="menu-item__price">550 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Греческий</span><span class="menu-item__desc">томаты, огурцы, перец, красный лук, оливки, маслины, фета</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">290 г</span><span class="menu-item__price">690 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Цезарь с курицей</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 г</span><span class="menu-item__price">700 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Цезарь с креветками</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 г</span><span class="menu-item__price">790 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Сырная куча</span><span class="menu-item__desc">четыре вида сыра, мёд</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">200 г</span><span class="menu-item__price">1100 ₽</span></div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="pod-vodochku">
+      <div class="menu-section__head"><h2>Под водочку</h2><span></span></div>
+      <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Селёдочка с картофелем</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">200 г</span><span class="menu-item__price">380 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Сало с хлебом и горчицей</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">200 г</span><span class="menu-item__price">400 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Овощные соленья</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">200 г</span><span class="menu-item__price">360 ₽</span></div></div>
@@ -358,8 +371,18 @@
         <div class="menu-item"><div><span class="menu-item__name">Капучино</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 мл</span><span class="menu-item__price">360 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Латте</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 мл</span><span class="menu-item__price">360 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Айс Латте</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 мл</span><span class="menu-item__price">430 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Байховый чай на выбор</span><span class="menu-item__desc">молочный улун, жасминовый, фруктовый, таёжный с брусникой и клюквой, марокканский, домашний со смородиной, иммунный с клубникой, манго</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">1000 мл</span><span class="menu-item__price">590 ₽</span></div></div>
       </div>
+      <p class="menu-section__note">Авторский чай на выбор — 1000 мл, 590 ₽.</p>
+      <ul class="menu-tea-list">
+        <li>Молочный улун</li>
+        <li>Жасминовый</li>
+        <li>Фруктовый</li>
+        <li>Таёжный с брусникой и клюквой</li>
+        <li>Марокканский</li>
+        <li>Домашний со смородиной</li>
+        <li>Иммунный с клубникой</li>
+        <li>Манго</li>
+      </ul>
     </section>
 
     <section class="menu-section" id="desserts">
@@ -383,8 +406,6 @@
         <div class="menu-item"><div><span class="menu-item__name">Сок, любой</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">180 мл</span><span class="menu-item__price">200 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Морс авторский</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">330 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Энергетик</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">350 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Безалкогольное пиво: Крушовице</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">300 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Безалкогольное пиво: Стаут / Саур / Бланш / Фрутбир</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл</span><span class="menu-item__price">350 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Лимонад авторский</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">330 мл / 1 л</span><span class="menu-item__price">330 / 800 ₽</span></div></div>
       </div>
     </section>
@@ -407,11 +428,11 @@
 
     <section class="menu-section" id="tinctures">
       <div class="menu-section__head"><h2>Авторские настойки «Шотик в ротик»</h2><span></span></div>
-      <p class="menu-section__note">Домашние настойки собственного производства — 18 вкусов на выбор.</p>
+      <p class="menu-section__note">Авторские настойки собственного производства — 18 вкусов на выбор.</p>
       <div class="menu-flavors">
         <span>Тайка</span><span>Бабл Кофе</span><span>Апельсин пряный</span><span>Вишня</span><span>Марина</span>
         <span>Клубничная Марта</span><span>Чёрная смородина</span><span>Облепиха</span><span>Тома-Тома</span>
-        <span>Клюква</span><span>Лимончелло</span><span>Лайм Мята Киви</span><span>Сельдерей Мята Лайм</span>
+        <span>Клюква</span><span>Лимончелло</span><span>Кровь любимой</span><span>Сельдерей Мята Лайм</span>
         <span>Мятный ликёр</span><span>Хреновуха</span><span>Бородино</span><span>Сливочно-кофейная Коровка</span>
         <span>Сливочно-Банановая</span>
       </div>
@@ -434,17 +455,17 @@
         <div class="menu-item"><div><span class="menu-item__name">Самогон №9</span><span class="menu-item__desc">фруктовый, абрикосовый</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">350 / 2100 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Коньяк «Орран», Армения, 5 лет</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">400 / 2800 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Виски «Гленгэрри»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5690 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Виски The Famous Grouse</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5400 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Виски Bandwagon (шотл.)</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5100 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Виски Jack Daniel's</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5100 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Виски Фэймос Граус</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5400 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Виски Бэндвагон (шотл.)</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5100 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Виски Джек Дэниелс</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5100 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Виски «Лох Монд»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">600 / 6100 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Бурбон «Джим Бим»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5100 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Джин English Park</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">450 / 3500 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Джин Инглиш Парк</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">450 / 3500 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Ликёр «Ягермайстер»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">450 / 3500 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Ром «Кастро»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">440 / 3000 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Ром «Такамака Бланк»</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5300 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Текила Don Alejandro Silver</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5300 ₽</span></div></div>
-        <div class="menu-item"><div><span class="menu-item__name">Текила Олмека Silver</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5300 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Текила Дон Алехандро Сильвер</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5300 ₽</span></div></div>
+        <div class="menu-item"><div><span class="menu-item__name">Текила Ольмека Сильвер</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">40 / 500 мл</span><span class="menu-item__price">500 / 5300 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Вино белое / красное / игристое</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">120 / 700 мл</span><span class="menu-item__price">500 / 2400 ₽</span></div></div>
       </div>
     </section>
@@ -489,20 +510,21 @@
       <div class="footer__col">
         <h4>Адрес</h4>
         <p>Варшавское шоссе, 45<br>м. Нагатинская</p>
-        <a href="tel:+79268284232">+7 926 828-42-32</a>
       </div>
       <div class="footer__col">
         <h4>Навигация</h4>
         <a href="index.html#about">О баре</a>
         <a href="index.html#afisha">Афиша</a>
         <a href="rider.html">Технический райдер</a>
+        <a href="triggerovchane.html">Триггеровчане</a>
         <a href="index.html#booking">Бронь</a>
       </div>
     </div>
     <div class="footer__bottom">
       <span>© Триггер Бар</span>
-      <span>Живой рок-н-ролл, крафтовое пиво, домашние настойки</span>
+      <span>Живой рок-н-ролл, крафтовое пиво, авторские настойки</span>
       <a href="privacy.html">Политика конфиденциальности</a>
+      <span class="footer__age">18+</span>
     </div>
   </div>
 </footer>

@@ -1,14 +1,47 @@
 // Триггер Бар — общая логика: бургер-меню, появление блоков при скролле, форма брони
 
 (function(){
+  try {
+    if (localStorage.getItem('triggerbar_age_ok') !== '1'){
+      var overlay = document.createElement('div');
+      overlay.className = 'age-gate';
+      overlay.innerHTML =
+        '<div class="age-gate__card">' +
+          '<span class="age-gate__badge">18+</span>' +
+          '<h3>Только для взрослых</h3>' +
+          '<p>Триггер Бар — заведение для гостей старше 18 лет. Продолжая, вы подтверждаете свой возраст.</p>' +
+          '<div class="age-gate__actions">' +
+            '<button type="button" class="btn age-gate__yes">Мне есть 18</button>' +
+            '<a href="https://www.google.com" class="age-gate__no">Мне нет 18</a>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(overlay);
+      document.body.style.overflow = 'hidden';
+      overlay.querySelector('.age-gate__yes').addEventListener('click', function(){
+        try { localStorage.setItem('triggerbar_age_ok', '1'); } catch(e){}
+        overlay.remove();
+        document.body.style.overflow = '';
+      });
+    }
+  } catch(e){}
+})();
+
+(function(){
   var nav = document.querySelector('.nav');
   var burger = document.querySelector('.nav__burger');
-  if (burger && nav){
-    burger.addEventListener('click', function(){
-      nav.classList.toggle('is-open');
-    });
+  var menuBtn = document.querySelector('.nav__menu-btn');
+  if (nav && (burger || menuBtn)){
+    var toggleNav = function(){
+      var isOpen = nav.classList.toggle('is-open');
+      if (menuBtn) menuBtn.textContent = isOpen ? 'Закрыть' : 'Меню';
+    };
+    if (burger) burger.addEventListener('click', toggleNav);
+    if (menuBtn) menuBtn.addEventListener('click', toggleNav);
     nav.querySelectorAll('.nav__links a').forEach(function(a){
-      a.addEventListener('click', function(){ nav.classList.remove('is-open'); });
+      a.addEventListener('click', function(){
+        nav.classList.remove('is-open');
+        if (menuBtn) menuBtn.textContent = 'Меню';
+      });
     });
   }
 
