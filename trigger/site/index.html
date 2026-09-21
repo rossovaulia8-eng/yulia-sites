@@ -363,11 +363,20 @@
   .contacts__info h2{ font-size:clamp(2rem, 4vw, 2.9rem); margin-top:14px; }
   .contacts__info > p{ margin-top:18px; color:var(--paper-dim); max-width:44ch; }
   .contacts__phone{
-    display:inline-block; margin-top:26px; font-family:var(--font-display); font-size:clamp(1.5rem, 3vw, 2rem);
+    /* block + fit-content: почта уходит на свою строку, но кликабельная
+       область телефона остаётся по ширине текста, а не во всю колонку */
+    display:block; width:fit-content; margin-top:26px; font-family:var(--font-display); font-size:clamp(1.5rem, 3vw, 2rem);
     color:var(--gold-bright); letter-spacing:.02em; transition:color .2s ease;
   }
   .contacts__phone:hover{ color:var(--gold); }
-  .contacts__address{ margin-top:10px !important; color:var(--paper-dim); font-size:.92rem; }
+  /* почта: тише телефона (звонок — основной способ связи), но заметно как ссылка */
+  .contacts__mail{
+    display:inline-block; margin-top:12px; font-size:1.02rem; letter-spacing:.03em;
+    color:var(--paper-dim); border-bottom:1px solid rgba(216,154,30,.4); padding-bottom:3px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .contacts__mail:hover{ color:var(--gold-bright); border-color:var(--gold-bright); }
+  .contacts__address{ margin-top:18px !important; color:var(--paper-dim); font-size:.92rem; }
   .contacts__hours{ margin-top:6px !important; color:var(--paper-dim); font-size:.92rem; }
   .contacts__social{ display:flex; gap:10px; margin-top:18px; }
   .contacts__social a{
@@ -611,8 +620,9 @@
     <div class="contacts__info reveal">
       <span class="eyebrow">На связи</span>
       <h2>Контакты</h2>
-      <p>Звони, если хочешь уточнить бронь, узнать про мероприятие или просто спросить, что сегодня играет.</p>
+      <p>Звони или пиши, если хочешь уточнить бронь, узнать про мероприятие или просто спросить, что сегодня играет.</p>
       <a href="tel:+79268284232" class="contacts__phone">+7 926 828-42-32</a>
+      <a href="mailto:info@triggerpub.ru" class="contacts__mail">info@triggerpub.ru</a>
       <p class="contacts__address">Варшавское шоссе, 45<br>м. Нагатинская</p>
       <p class="contacts__hours">Вс–Чт 16:00–23:00 · Пт–Сб 16:00–01:00</p>
       <div class="contacts__social">
@@ -659,7 +669,9 @@
         <img src="assets/logo-badge.webp" alt="Триггер Бар" class="footer__logo">
       </div>
       <div class="footer__col">
-        <h4>Адрес</h4>
+        <h4>Контакты</h4>
+        <a href="tel:+79268284232">+7 926 828-42-32</a>
+        <a href="mailto:info@triggerpub.ru">info@triggerpub.ru</a>
         <p>Варшавское шоссе, 45<br>м. Нагатинская</p>
       </div>
       <div class="footer__col">
