@@ -330,10 +330,21 @@
     margin-top:16px; padding:14px 16px; border-radius:6px; background:rgba(216,154,30,.12);
     border:1px solid var(--line); color:var(--gold-bright); font-size:.88rem;
   }
+  /* заявка не дошла: красным, чтобы не перепутать с подтверждением брони */
+  .booking-form__status.is-error,
+  .contacts-form__status.is-error{
+    background:rgba(198,58,42,.14); border-color:rgba(198,58,42,.5); color:#f0a79c;
+  }
+  /* ловушка для спам-ботов: живой гость этого поля не видит */
+  .field-trap{
+    position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;
+  }
   @media (max-width: 900px){
     .booking__grid{ grid-template-columns:1fr; }
     .booking-form{ transform:none; }
-    .field-row{ grid-template-columns:1fr; }
+    /* в одну колонку gap превращается в лишний вертикальный отступ поверх
+       margin-bottom у .field — убираем, чтобы поля шли с ровным шагом */
+    .field-row{ grid-template-columns:1fr; gap:0; }
   }
 
   /* ---------- decor (гитары, закреплённые по краям — статичны при скролле) ---------- */
@@ -550,9 +561,17 @@
         <label for="bf-name">Имя гостя</label>
         <input id="bf-name" name="name" type="text" placeholder="Как к вам обращаться" required>
       </div>
-      <div class="field">
-        <label for="bf-date">Дата визита</label>
-        <input id="bf-date" name="date" type="date" required>
+      <div class="field-row">
+        <div class="field">
+          <label for="bf-date">Дата визита</label>
+          <input id="bf-date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="bf-time">Время визита</label>
+          <select id="bf-time" name="time" required>
+            <option value="" disabled selected>Выберите время</option>
+          </select>
+        </div>
       </div>
       <div class="field-row">
         <div class="field">
@@ -572,6 +591,10 @@
           <option value="whatsapp">Ватсап</option>
           <option value="max">Макс</option>
         </select>
+      </div>
+      <div class="field-trap" aria-hidden="true">
+        <label for="bf-website">Не заполняйте это поле</label>
+        <input id="bf-website" name="website" type="text" tabindex="-1" autocomplete="off">
       </div>
       <label class="field-check">
         <input type="checkbox" id="bf-consent" name="consent" required>
@@ -614,6 +637,10 @@
       <div class="field">
         <label for="cf-message">Сообщение</label>
         <textarea id="cf-message" name="message" rows="4" placeholder="Что хотели спросить или предложить" required></textarea>
+      </div>
+      <div class="field-trap" aria-hidden="true">
+        <label for="cf-website">Не заполняйте это поле</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
       </div>
       <label class="field-check">
         <input type="checkbox" id="cf-consent" name="consent" required>
@@ -947,6 +974,9 @@
     if (!btn || !btn.dataset.date || !bookDateInput) return;
     e.preventDefault();
     bookDateInput.value = btn.dataset.date;
+    // программная установка value события change не вызывает — шлём вручную,
+    // иначе список времени не перестроится под день недели этого концерта
+    bookDateInput.dispatchEvent(new Event('change'));
     // ведём сразу к форме, а не к заголовку раздела — на телефоне форма ниже экрана
     bookDateInput.form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(function(){ bookNameInput.focus({ preventScroll: true }); }, 700);

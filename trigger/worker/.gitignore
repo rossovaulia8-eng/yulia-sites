@@ -1,0 +1,5 @@
+# служебный кеш wrangler (в нём id аккаунта Cloudflare) — в репозиторий не нужен
+.wrangler/
+node_modules/
+# секреты живут в Cloudflare (wrangler secret put), файлов с ними тут быть не должно
+.dev.vars

@@ -1,0 +1,13 @@
+name = "trigger-bar-forms"
+main = "src/index.js"
+compatibility_date = "2026-09-21"
+
+# Нужен библиотеке worker-mailer, которая отправляет письма на почту бара.
+compatibility_flags = ["nodejs_compat"]
+
+# Токен бота и id чата сюда НЕ пишем — это секреты, они ставятся командой
+# wrangler secret put BOT_TOKEN
+# wrangler secret put CHAT_ID
+# wrangler secret put SMTP_USER   — ящик, с которого уходят письма (site@triggerpub.ru)
+# wrangler secret put SMTP_PASS   — его пароль
+# Файл лежит в git, а секреты в git попадать не должны.
