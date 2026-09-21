@@ -513,7 +513,7 @@
     </div>
     <div class="afisha__week" id="afishaWeek"></div>
     <div class="afisha__list">
-      <div class="afisha__list__label"><span id="afishaListLabel">Ближайшие события</span><button type="button" id="afishaListReset" hidden>С сегодня</button></div>
+      <div class="afisha__list__label"><span id="afishaListLabel">Ближайшие дни</span><button type="button" id="afishaListReset" hidden>С сегодня</button></div>
       <div class="afisha__list__items" id="afishaList"></div>
       <button type="button" class="afisha__more" id="afishaMore" hidden>Показать ещё</button>
     </div>
@@ -725,7 +725,7 @@
   var moreBtn = document.getElementById('afishaMore');
   var mobileQuery = window.matchMedia('(max-width: 760px)');
 
-  var LIST_STEP = 5;
+  var LIST_STEP = 7; // неделя целиком: Пн–Вс
   var today = new Date(); today.setHours(0,0,0,0);
   var todayKey = toKey(today);
 
@@ -816,22 +816,36 @@
   weekEl.addEventListener('scroll', updateWeekHint, { passive: true });
   window.addEventListener('resize', updateWeekHint);
 
-  // Телефон: только дни с событиями, начиная с сегодня (или с выбранной в календаре даты)
+  // Телефон: все дни подряд, Пн–Вс, включая пивные — с сегодня (или с выбранной в календаре даты).
+  // Конец списка — последний день месяца, в котором стоит самое дальнее событие афиши.
+  var lastEventKey = events.reduce(function(max, e){ return e.date > max ? e.date : max; }, todayKey);
+  var lastEventDate = fromKey(lastEventKey);
+  var listEndKey = toKey(new Date(lastEventDate.getFullYear(), lastEventDate.getMonth() + 1, 0));
+
+  function listDays(){
+    var days = [];
+    var d = fromKey(listFromKey);
+    while (toKey(d) <= listEndKey){
+      days.push(new Date(d));
+      d.setDate(d.getDate() + 1);
+    }
+    return days;
+  }
+
   function renderList(){
-    var upcoming = events.filter(function(e){ return e.date >= listFromKey; });
+    var days = listDays();
     listEl.innerHTML = '';
-    upcoming.slice(0, listLimit).forEach(function(ev){
-      var d = fromKey(ev.date);
-      listEl.appendChild(dayCard(d, ev, (d.getDay() + 6) % 7));
+    days.slice(0, listLimit).forEach(function(d){
+      listEl.appendChild(dayCard(d, eventOn(toKey(d)), (d.getDay() + 6) % 7));
     });
-    if (!upcoming.length){
+    if (!days.length){
       listEl.innerHTML = '<p class="afisha__list__empty">Дальше в афише пока пусто — приходи в пивной день или уточни расписание в баре.</p>';
     }
-    moreBtn.hidden = upcoming.length <= listLimit;
+    moreBtn.hidden = days.length <= listLimit;
 
     var isFromToday = listFromKey === todayKey;
     var from = fromKey(listFromKey);
-    listLabelEl.textContent = isFromToday ? 'Ближайшие события' : 'События с ' + from.getDate() + ' ' + monthNamesGen[from.getMonth()];
+    listLabelEl.textContent = isFromToday ? 'Ближайшие дни' : 'Афиша с ' + from.getDate() + ' ' + monthNamesGen[from.getMonth()];
     listResetBtn.hidden = isFromToday;
   }
 
