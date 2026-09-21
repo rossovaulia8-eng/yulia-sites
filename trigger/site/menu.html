@@ -111,6 +111,7 @@
   .menu-section__head h2{ font-size:clamp(1.5rem, 3vw, 2rem); color:var(--gold-bright); }
   .menu-section__head span{ flex:1; height:1px; background:var(--line); }
   .menu-section__note{ margin:-14px 0 26px; color:var(--paper-dim); font-size:.88rem; }
+  .menu-section__note strong{ font-family:var(--font-display); font-weight:400; color:var(--gold-bright); font-size:1rem; }
 
   .menu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 48px; }
   .menu-item{ display:flex; align-items:baseline; gap:8px; padding:14px 0; border-bottom:1px dashed var(--line); }
@@ -126,9 +127,9 @@
   .menu-flavors span{
     padding:8px 14px; border-radius:8px; border:1px solid var(--line); font-size:.82rem; color:var(--paper-dim);
   }
-  .menu-tea-list{ list-style:none; padding:0; margin:0; max-width:420px; }
-  .menu-tea-list li{ padding:12px 0; border-bottom:1px dashed var(--line); color:var(--paper-dim); font-size:.94rem; }
-  .menu-tea-list li:last-child{ border-bottom:none; }
+  .menu-tea-list{ list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:0 48px; }
+  .menu-tea-list li{ padding:14px 0; border-bottom:1px dashed var(--line); color:var(--paper); font-weight:700; font-size:.98rem; }
+  @media (max-width: 760px){ .menu-tea-list{ grid-template-columns:1fr; } }
   .menu-price-tiers{ display:flex; gap:14px; flex-wrap:wrap; }
   .menu-price-tiers div{
     background:var(--ink-2); border:1px solid var(--line); border-radius:6px; padding:16px 22px; text-align:center;
@@ -238,7 +239,8 @@
     <a href="#salads">Салаты</a>
     <a href="#pod-vodochku">Под водочку</a>
     <a href="#snacks">Закуски</a>
-    <a href="#coffee">Кофе и чай</a>
+    <a href="#coffee">Кофе</a>
+    <a href="#tea">Чай</a>
     <a href="#desserts">Десерты</a>
     <a href="#drinks">Напитки</a>
     <a href="#cocktails">Коктейли</a>
@@ -364,7 +366,7 @@
     </section>
 
     <section class="menu-section" id="coffee">
-      <div class="menu-section__head"><h2>Кофе и чай</h2><span></span></div>
+      <div class="menu-section__head"><h2>Кофе</h2><span></span></div>
       <div class="menu-grid">
         <div class="menu-item"><div><span class="menu-item__name">Эспрессо</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">125 мл</span><span class="menu-item__price">230 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Американо</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 мл</span><span class="menu-item__price">290 ₽</span></div></div>
@@ -372,7 +374,11 @@
         <div class="menu-item"><div><span class="menu-item__name">Латте</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">250 мл</span><span class="menu-item__price">360 ₽</span></div></div>
         <div class="menu-item"><div><span class="menu-item__name">Айс Латте</span></div><div class="menu-item__leader"></div><div class="menu-item__right"><span class="menu-item__weight">400 мл</span><span class="menu-item__price">430 ₽</span></div></div>
       </div>
-      <p class="menu-section__note">Авторский чай на выбор — 1000 мл, 590 ₽.</p>
+    </section>
+
+    <section class="menu-section" id="tea">
+      <div class="menu-section__head"><h2>Авторский чай</h2><span></span></div>
+      <p class="menu-section__note">Чайник 1000 мл — <strong>590 ₽</strong></p>
       <ul class="menu-tea-list">
         <li>Молочный улун</li>
         <li>Жасминовый</li>
