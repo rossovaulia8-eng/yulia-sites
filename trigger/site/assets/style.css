@@ -142,9 +142,18 @@ body::before{
   .nav__links{
     position:fixed; inset:116px 0 0 0; height:calc(100dvh - 116px);
     background:var(--ink); flex-direction:column; justify-content:center; gap:30px;
-    transform:translateX(100%); transition:transform .35s ease; z-index:150;
+    transform:translateX(100%); z-index:150;
+    /* Закрытое меню убрано из раскладки через display:none. Иначе оно продолжает
+       висеть за правым краем экрана и делает страницу вдвое шире — её можно
+       утащить пальцем вбок. allow-discrete сохраняет анимацию выезда в новых
+       браузерах; в старых меню просто появится сразу — это нормально. */
+    display:none;
+    transition:transform .35s ease, display .35s allow-discrete;
   }
-  .nav.is-open .nav__links{ transform:translateX(0); }
+  .nav.is-open .nav__links{ display:flex; transform:translateX(0); }
+  @starting-style{
+    .nav.is-open .nav__links{ transform:translateX(100%); }
+  }
   .nav__links a{ font-size:1.3rem; }
   .nav__burger{ display:block; }
   .nav__menu-btn{

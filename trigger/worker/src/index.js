@@ -14,6 +14,8 @@ import { WorkerMailer } from 'worker-mailer';
 
 // Отсюда воркер принимает заявки. Чужой сайт вызвать его не сможет.
 const ALLOWED_ORIGINS = [
+  'https://triggerpub.ru',
+  'https://www.triggerpub.ru',
   'https://rossovaulia8-eng-yulia-sites-831f.twc1.net',
   'http://localhost:8000',
   'http://127.0.0.1:8000',

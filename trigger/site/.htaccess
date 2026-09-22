@@ -1,0 +1,12 @@
+# Своя страница 404 вместо стандартной заглушки хостинга.
+ErrorDocument 404 /404.html
+
+# Кэш для картинок и стилей: гость, который вернётся, не будет грузить их заново.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
