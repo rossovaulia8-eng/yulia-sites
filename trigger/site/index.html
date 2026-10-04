@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Триггер Бар — рок-бар с живой музыкой на Варшавском шоссе</title>
 <meta name="description" content="Триггер Бар — живые рок-концерты каждую неделю, 17 сортов крафтового пива и авторские настойки собственного производства. Варшавское шоссе, 45.">
@@ -22,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=73">
+<link rel="stylesheet" href="assets/style.css?v=74-demo">
 <style>
   /* ---------- hero (картинка на весь экран, без текста) ---------- */
   .hero{
@@ -115,7 +116,7 @@
     background:radial-gradient(circle, rgba(216,154,30,.18), transparent 68%);
   }
   .about__row__art img{
-    position:relative; z-index:1; width:100%; max-width:680px; transform:rotate(-2.5deg);
+    position:relative; z-index:1; width:100%; height:auto; max-width:680px; transform:rotate(-2.5deg);
     filter:drop-shadow(0 30px 34px rgba(0,0,0,.6));
     transition:transform .4s ease;
   }
@@ -146,7 +147,7 @@
 
   @media (max-width: 900px){
     .about__row, .about__row--reverse{ flex-direction:column; text-align:center; gap:20px; padding:20px 0; }
-    .about__row__art{ flex:none; justify-content:center; }
+    .about__row__art{ flex:none; width:min(320px, 100%); margin-inline:auto; justify-content:center; }
     .about__row--reverse .about__row__art{ justify-content:center; }
     .about__row__art img, .about__row--reverse .about__row__art img{ max-width:320px; transform:none; }
     .about__row__text{ padding-inline:0; }
@@ -423,6 +424,38 @@
     .contacts__grid{ grid-template-columns:1fr; }
     .contacts{ padding:100px 0 80px; }
   }
+
+  /* ---------- hall scheme (схема зала, перерисована с приложения брони клиента) ---------- */
+  .hall{ padding:130px 0 40px; background:var(--ink); }
+  .hall__grid{ display:grid; grid-template-columns:1fr minmax(0, 480px); gap:80px; align-items:center; }
+  .hall__copy h2{ font-size:clamp(2rem, 4vw, 2.9rem); margin-top:14px; }
+  .hall__copy p{ margin-top:18px; color:var(--paper-dim); max-width:44ch; }
+  .hall__legend{ margin:28px 0 34px; display:grid; gap:12px; font-size:.9rem; color:var(--paper-dim); }
+  .hall__legend li{ display:flex; align-items:center; gap:12px; }
+  .hall__dot{ width:12px; height:12px; border-radius:50%; background:var(--accent-bright); flex:none; }
+  .hall__dot--bar{ background:var(--gold-bright); }
+  .hall__plan{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:10px; padding:24px;
+    box-shadow:var(--shadow);
+  }
+  .hall__svg{ display:block; width:100%; height:auto; }
+  .hall__floor{ fill:var(--ink-3); stroke:var(--line); stroke-width:2; }
+  .hall__bar{ fill:none; stroke:var(--gold-dim); stroke-width:3; stroke-linejoin:round; }
+  .hall__table{ fill:var(--ink); stroke:rgba(242,237,224,.35); stroke-width:2; }
+  .hall__num{ fill:var(--paper); font-family:var(--font-body); font-weight:700; font-size:22px; text-anchor:middle; }
+  .hall__seat{ fill:var(--accent-bright); }
+  .hall__seat--bar{ fill:var(--gold-bright); }
+  .hall__stage{ fill:none; stroke:var(--gold); stroke-width:5; stroke-linecap:round; }
+  .hall__label{ fill:var(--paper-dim); font-family:var(--font-body); font-weight:700; font-size:22px; letter-spacing:.14em; text-transform:uppercase; text-anchor:middle; }
+  .hall__label--stage{ fill:var(--gold-bright); font-family:var(--font-display); font-weight:400; font-size:34px; letter-spacing:.08em; }
+  @media (max-width: 900px){
+    .hall{ padding:80px 0 20px; }
+    .hall__grid{ grid-template-columns:1fr; gap:36px; }
+    .hall__copy{ text-align:center; }
+    .hall__copy p{ margin-inline:auto; }
+    .hall__legend{ justify-content:center; grid-auto-flow:column; gap:24px; }
+    .hall__plan{ padding:12px; width:min(480px, 100%); margin-inline:auto; }
+  }
 </style>
 </head>
 <body>
@@ -432,8 +465,43 @@
 
 <header class="nav">
   <div class="nav__inner">
-    <a href="index.html" class="nav__brand">
-      <img src="assets/logo-badge.webp" alt="Триггер Бар" class="nav__logo">
+    <a href="/" class="nav__brand">
+      <svg class="nav__logo tg-logo" viewBox="-60 -10 760 380" role="img" aria-label="Триггер Бар">
+  <defs>
+    <symbol id="tg-guitar-n" viewBox="0 0 200 200"><g transform="translate(7 -7) rotate(45 100 100) translate(100 100) scale(0.82) translate(-100 -100)">
+<g stroke="#C21C96" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M88 112 C82 100 72 92 63 98 C55 104 60 118 58 128 C56 140 44 148 46 164 C48 182 70 190 100 188 C130 190 152 182 154 164 C156 148 144 140 142 128 C140 118 147 104 139 98 C130 92 118 100 112 112"/>
+<path d="M94 112 L94 28 M106 28 L106 112"/>
+<path d="M92 28 L92 8 Q100 2 108 8 L108 28 Z"/>
+</g>
+<g stroke="#D89A1E" stroke-width="4" stroke-linecap="round">
+<line x1="86" y1="130" x2="114" y2="130"/>
+<line x1="86" y1="146" x2="114" y2="146"/>
+<line x1="88" y1="166" x2="112" y2="166"/>
+</g>
+<circle cx="88" cy="13" r="2.6" fill="#D89A1E"/><circle cx="88" cy="22" r="2.6" fill="#D89A1E"/><circle cx="112" cy="13" r="2.6" fill="#D89A1E"/><circle cx="112" cy="22" r="2.6" fill="#D89A1E"/>
+<circle cx="132" cy="162" r="4" fill="#D89A1E"/>
+<circle cx="124" cy="176" r="4" fill="#D89A1E"/>
+</g></symbol>
+  </defs>
+  <ellipse cx="320" cy="178" rx="320" ry="115" transform="rotate(-9 320 178)" fill="none" stroke="#c21c96" stroke-width="2.5" class="orbit"/>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar" opacity="0">
+      <use href="#tg-guitar-n" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="word" x="320" y="160" text-anchor="middle" dominant-baseline="central">ТРИГГЕР</text>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar">
+      <use href="#tg-guitar-n" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="tag" x="320" y="230" text-anchor="middle">РОК-БАР</text>
+</svg>
     </a>
     <nav class="nav__links">
       <a href="#about">О баре</a>
@@ -493,7 +561,7 @@
   <div class="about__rows">
       <div class="about__row reveal">
         <div class="about__row__art">
-          <img src="assets/guitarist.webp?v=3" alt="Живая рок-музыка в Триггер Баре" loading="lazy" decoding="async">
+          <img src="assets/guitarist.webp?v=3" alt="Живая рок-музыка в Триггер Баре" width="1000" height="1000" loading="lazy" decoding="async">
           <span class="about__row__tag">громко!</span>
         </div>
         <div class="about__row__text">
@@ -503,7 +571,7 @@
       </div>
       <div class="about__row about__row--reverse reveal">
         <div class="about__row__art">
-          <img src="assets/drummer.webp" alt="Атмосфера рок-н-ролла" loading="lazy" decoding="async">
+          <img src="assets/drummer.webp" alt="Атмосфера рок-н-ролла" width="1000" height="1000" loading="lazy" decoding="async">
           <span class="about__row__tag">без выходных</span>
         </div>
         <div class="about__row__text">
@@ -513,7 +581,7 @@
       </div>
       <div class="about__row reveal">
         <div class="about__row__art">
-          <img src="assets/bartender.webp?v=7" alt="Настойки собственного производства" loading="lazy" decoding="async">
+          <img src="assets/bartender.webp?v=7" alt="Настойки собственного производства" width="1000" height="1000" loading="lazy" decoding="async">
           <span class="about__row__tag about__row__tag--home">авторские</span>
         </div>
         <div class="about__row__text">
@@ -551,6 +619,103 @@
       <button type="button" class="afisha__more" id="afishaMore" hidden>Показать ещё</button>
     </div>
     <p class="afisha__foot">Расписание обновляется каждую неделю — если группы, которую ты ищешь, здесь ещё нет, уточни в баре.</p>
+  </div>
+</section>
+
+<section class="hall" id="hall">
+  <div class="container hall__grid">
+    <div class="hall__copy reveal">
+      <span class="eyebrow">Где сесть</span>
+      <h2>Схема зала</h2>
+      <p>Сцена — в конце зала, ближе всего к ней столы 11–14. Вдоль правой стены — столы 1–12, слева — барная стойка и столы 13–18.</p>
+      <p>Хочешь сесть за конкретный стол — назови его номер, когда мы перезвоним подтвердить бронь.</p>
+      <ul class="hall__legend">
+        <li><i class="hall__dot hall__dot--bar"></i>Места у бара</li>
+        <li><i class="hall__dot"></i>Места за столами</li>
+      </ul>
+      <a href="#booking" class="btn">Забронировать стол</a>
+    </div>
+    <div class="hall__plan reveal">
+        <svg class="hall__svg" viewBox="60 20 790 1215" role="img" aria-label="Схема зала Триггер Бара: барная стойка слева, столы с 1 по 18, сцена внизу">
+          <rect class="hall__floor" x="66" y="26" width="778" height="1110" rx="18"/>
+          <path class="hall__bar" d="M92 188 H230 V568 H165 V251 H92 Z"/>
+          <text class="hall__label" x="198" y="410" transform="rotate(-90 198 410)">бар</text>
+          <circle class="hall__seat hall__seat--bar" cx="127" cy="159" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="158" cy="159" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="188" cy="159" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="239" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="269.5" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="300" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="330.5" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="361" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="391.5" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="422" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="452.5" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="483" r="11"/>
+          <circle class="hall__seat hall__seat--bar" cx="258" cy="513.5" r="11"/>
+          <circle class="hall__seat" cx="735" cy="62" r="11"/>
+          <circle class="hall__seat" cx="687" cy="110" r="11"/>
+          <circle class="hall__seat" cx="782" cy="110" r="11"/>
+          <circle class="hall__seat" cx="687" cy="159" r="11"/>
+          <circle class="hall__seat" cx="782" cy="159" r="11"/>
+          <circle class="hall__seat" cx="687" cy="266" r="11"/>
+          <circle class="hall__seat" cx="782" cy="266" r="11"/>
+          <circle class="hall__seat" cx="687" cy="314" r="11"/>
+          <circle class="hall__seat" cx="782" cy="314" r="11"/>
+          <circle class="hall__seat" cx="687" cy="422" r="11"/>
+          <circle class="hall__seat" cx="782" cy="422" r="11"/>
+          <circle class="hall__seat" cx="687" cy="470" r="11"/>
+          <circle class="hall__seat" cx="782" cy="470" r="11"/>
+          <circle class="hall__seat" cx="687" cy="578" r="11"/>
+          <circle class="hall__seat" cx="782" cy="578" r="11"/>
+          <circle class="hall__seat" cx="687" cy="626" r="11"/>
+          <circle class="hall__seat" cx="782" cy="626" r="11"/>
+          <circle class="hall__seat" cx="687" cy="845" r="11"/>
+          <circle class="hall__seat" cx="782" cy="845" r="11"/>
+          <circle class="hall__seat" cx="687" cy="893" r="11"/>
+          <circle class="hall__seat" cx="782" cy="893" r="11"/>
+          <circle class="hall__seat" cx="687" cy="1008" r="11"/>
+          <circle class="hall__seat" cx="782" cy="1008" r="11"/>
+          <circle class="hall__seat" cx="687" cy="1056" r="11"/>
+          <circle class="hall__seat" cx="782" cy="1056" r="11"/>
+          <circle class="hall__seat" cx="797" cy="211" r="11"/>
+          <circle class="hall__seat" cx="797" cy="368" r="11"/>
+          <circle class="hall__seat" cx="797" cy="521" r="11"/>
+          <circle class="hall__seat" cx="797" cy="680" r="11"/>
+          <circle class="hall__seat" cx="184" cy="745" r="11"/>
+          <circle class="hall__seat" cx="233" cy="745" r="11"/>
+          <circle class="hall__seat" cx="136" cy="794" r="11"/>
+          <circle class="hall__seat" cx="280" cy="794" r="11"/>
+          <circle class="hall__seat" cx="136" cy="845" r="11"/>
+          <circle class="hall__seat" cx="231" cy="845" r="11"/>
+          <circle class="hall__seat" cx="136" cy="893" r="11"/>
+          <circle class="hall__seat" cx="231" cy="893" r="11"/>
+          <circle class="hall__seat" cx="136" cy="1008" r="11"/>
+          <circle class="hall__seat" cx="231" cy="1008" r="11"/>
+          <circle class="hall__seat" cx="136" cy="1056" r="11"/>
+          <circle class="hall__seat" cx="231" cy="1056" r="11"/>
+          <rect class="hall__table" x="712" y="87" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="118">1</text>
+          <rect class="hall__table" x="712" y="136" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="167">2</text>
+          <rect class="hall__table" x="712" y="243" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="274">3</text>
+          <rect class="hall__table" x="712" y="291" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="322">4</text>
+          <rect class="hall__table" x="712" y="399" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="430">5</text>
+          <rect class="hall__table" x="712" y="447" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="478">6</text>
+          <rect class="hall__table" x="712" y="555" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="586">7</text>
+          <rect class="hall__table" x="712" y="603" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="634">8</text>
+          <rect class="hall__table" x="712" y="822" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="853">9</text>
+          <rect class="hall__table" x="712" y="870" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="901">10</text>
+          <rect class="hall__table" x="712" y="985" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="1016">11</text>
+          <rect class="hall__table" x="712" y="1033" width="48" height="46" rx="6"/><text class="hall__num" x="736" y="1064">12</text>
+          <rect class="hall__table" x="161" y="1033" width="48" height="46" rx="6"/><text class="hall__num" x="185" y="1064">13</text>
+          <rect class="hall__table" x="161" y="985" width="48" height="46" rx="6"/><text class="hall__num" x="185" y="1016">14</text>
+          <rect class="hall__table" x="161" y="870" width="48" height="46" rx="6"/><text class="hall__num" x="185" y="901">15</text>
+          <rect class="hall__table" x="161" y="822" width="48" height="46" rx="6"/><text class="hall__num" x="185" y="853">16</text>
+          <rect class="hall__table" x="161" y="771" width="48" height="46" rx="6"/><text class="hall__num" x="185" y="802">17</text>
+          <rect class="hall__table" x="210" y="771" width="48" height="46" rx="6"/><text class="hall__num" x="234" y="802">18</text>
+          <path class="hall__stage" d="M252 1182 Q450 1150 648 1182"/>
+          <text class="hall__label hall__label--stage" x="450" y="1222">Сцена</text>
+        </svg>
+    </div>
   </div>
 </section>
 
@@ -679,7 +844,42 @@
   <div class="container">
     <div class="footer__inner">
       <div class="footer__brand">
-        <img src="assets/logo-badge.webp" alt="Триггер Бар" class="footer__logo">
+        <svg class="footer__logo tg-logo" viewBox="-60 -10 760 380" role="img" aria-label="Триггер Бар">
+  <defs>
+    <symbol id="tg-guitar-f" viewBox="0 0 200 200"><g transform="translate(7 -7) rotate(45 100 100) translate(100 100) scale(0.82) translate(-100 -100)">
+<g stroke="#C21C96" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M88 112 C82 100 72 92 63 98 C55 104 60 118 58 128 C56 140 44 148 46 164 C48 182 70 190 100 188 C130 190 152 182 154 164 C156 148 144 140 142 128 C140 118 147 104 139 98 C130 92 118 100 112 112"/>
+<path d="M94 112 L94 28 M106 28 L106 112"/>
+<path d="M92 28 L92 8 Q100 2 108 8 L108 28 Z"/>
+</g>
+<g stroke="#D89A1E" stroke-width="4" stroke-linecap="round">
+<line x1="86" y1="130" x2="114" y2="130"/>
+<line x1="86" y1="146" x2="114" y2="146"/>
+<line x1="88" y1="166" x2="112" y2="166"/>
+</g>
+<circle cx="88" cy="13" r="2.6" fill="#D89A1E"/><circle cx="88" cy="22" r="2.6" fill="#D89A1E"/><circle cx="112" cy="13" r="2.6" fill="#D89A1E"/><circle cx="112" cy="22" r="2.6" fill="#D89A1E"/>
+<circle cx="132" cy="162" r="4" fill="#D89A1E"/>
+<circle cx="124" cy="176" r="4" fill="#D89A1E"/>
+</g></symbol>
+  </defs>
+  <ellipse cx="320" cy="178" rx="320" ry="115" transform="rotate(-9 320 178)" fill="none" stroke="#c21c96" stroke-width="2.5" class="orbit"/>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar" opacity="0">
+      <use href="#tg-guitar-f" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="word" x="320" y="160" text-anchor="middle" dominant-baseline="central">ТРИГГЕР</text>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar">
+      <use href="#tg-guitar-f" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="tag" x="320" y="230" text-anchor="middle">РОК-БАР</text>
+</svg>
       </div>
       <div class="footer__col">
         <h4>Контакты</h4>
@@ -713,7 +913,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js"></script>
+<script src="assets/script.js?v=3-demo"></script>
 <script>
 (function(){
   var events = [
@@ -725,24 +925,29 @@
     {date:'2026-09-24', title:'Меркурий-Фест', time:'19:00–23:00', poster:'event-merkuriy-fest.html'},
     {date:'2026-09-25', title:'Вумэн Фест (Вадим)', time:'19:00–23:00'},
     {date:'2026-09-26', title:'Рок-фест «Лыжня», 4 группы', time:'18:00–23:00'},
+    {date:'2026-09-28', title:'Кубок Москвы по караоке', time:'Сбор 19:30, начало 20:30', poster:'event-karaoke-28-09.html'},
+    {date:'2026-09-29', title:'Блямберский вечер', time:'Сбор 17:00, начало 17:30', poster:'event-blyamba-29-09.html'},
+    {date:'2026-09-30', title:'Творческий вечер «Вера, Надежда, Любовь!»', time:'18:00–22:00', poster:'event-vera-nadezhda-lyubov.html'},
 
-    {date:'2026-10-02', title:'Фестиваль «Лыжня»'},
-    {date:'2026-10-03', title:'Фестиваль андеграунд-музыки', time:'19:00–23:00'},
-    {date:'2026-10-04', title:'ВЕГА — сольный концерт (Дмитрий, РОК1000)'},
+    {date:'2026-10-02', title:'Триггер Рок Фест — Игры, Одно и Навсегда, Даша и Серёжа', time:'19:00', poster:'event-trigger-rock-fest-02-10.html'},
+    {date:'2026-10-03', title:'Underground Music Fest — открытие сезона', time:'18:00', poster:'event-underground-fest.html'},
+    {date:'2026-10-04', title:'ВЕГА — кавер-хиты', time:'19:00', poster:'event-vega.html'},
     {date:'2026-10-06', title:'«Лай, любовь и рок-н-ролл»', time:'Сбор 18:00, начало 20:00', poster:'event-lay-lyubov.html', tickets:'https://qtickets.ru/event/257793'},
-    {date:'2026-10-08', title:'Виноградный Меркурий', time:'19:00–23:00'},
+    {date:'2026-10-07', title:'Микро Шквал — Павел Жданович и Дмитрий Пожидаев', time:'20:00', poster:'event-mikro-shkval-07-10.html'},
+    {date:'2026-10-08', title:'Меркурий-Фест — вечер музыкального юмора', time:'Сбор 18:30, начало 19:00', poster:'event-merkuriy-fest-08-10.html'},
     {date:'2026-10-09', title:'Кип Файр — сольник'},
-    {date:'2026-10-10', title:'Фестиваль «То-то и оно» и другие, 6 групп'},
+    {date:'2026-10-10', title:'Триггер Рок Фест — «То-то и оно» и ещё 5 групп', time:'16:00', poster:'event-trigger-rock-fest-10-10.html'},
     {date:'2026-10-11', title:'Натали Северр'},
     {date:'2026-10-16', title:'«4-й Дуст», акустика'},
-    {date:'2026-10-17', title:'День рождения группы «Дореми»'},
-    {date:'2026-10-18', title:'Наталия «Громофон»', time:'16:00–23:00'},
+    {date:'2026-10-17', title:'Юбилей «ДоРеМи»', time:'17:00', poster:'event-doremi.html'},
+    {date:'2026-10-18', title:'Наталья Иванникова — «Осень в каждом звуке»', time:'Сбор 17:30, начало 18:00', poster:'event-ivannikova-18-10.html'},
     {date:'2026-10-20', title:'Кубок Москвы по караоке'},
     {date:'2026-10-21', title:'«Приди и спой!» — вечер Елены из Краснодара'},
     {date:'2026-10-22', title:'Виноградный Меркурий', time:'19:00–23:00'},
     {date:'2026-10-23', title:'Вумэн Фест (Вадим)'},
-    {date:'2026-10-24', title:'Рок-фест «Триггер»'},
+    {date:'2026-10-24', title:'Триггер Рок Фест — 7 групп', time:'16:00', poster:'event-trigger-rock-fest-24-10.html'},
 
+    {date:'2026-11-01', title:'Микро Шквал — Павел Жданович и Дмитрий Пожидаев', time:'20:00', poster:'event-mikro-shkval-01-11.html'},
     {date:'2026-11-03', title:'Тусовка Алексея'},
     {date:'2026-11-05', title:'Виноградный Меркурий', time:'19:00–23:00'},
     {date:'2026-11-06', title:'Катя и Крокодилз'},

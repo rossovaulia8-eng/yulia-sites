@@ -84,7 +84,7 @@
   // Исходник воркера и порядок подключения — sites/trigger/worker/.
   // Если сюда вписать пустую строку, вернётся демо-режим: сообщение об
   // отправке показывается, но заявка никуда не уходит.
-  var FORMS_ENDPOINT = 'https://trigger-bar-forms.rossovaulia8.workers.dev';
+  var FORMS_ENDPOINT = ''; // демо-копия на Timeweb: заявки никуда не уходят (боевой адрес — на triggerpub.ru)
 
   var PHONE_HINT = 'Не получилось отправить заявку. Позвоните нам: +7 926 828-42-32';
 
@@ -121,7 +121,7 @@
         setTimeout(function(){
           form.reset();
           releaseButton();
-          showStatus(successText, false);
+          showStatus('Это демо-версия сайта — заявка не отправлена. Забронировать столик: triggerpub.ru или +7 926 828-42-32', false);
         }, 700);
         return;
       }
@@ -199,4 +199,40 @@
     menuNav.addEventListener('scroll', updateMenuNavHint, { passive: true });
     window.addEventListener('resize', updateMenuNavHint);
   }
+
+  // Переход с другой страницы на /#afisha: браузер начинает плавную прокрутку, пока
+  // страница ещё собирается, и останавливается выше нужного блока — после загрузки
+  // шрифтов блоки съезжают вниз (на телефоне почти на экран). Когда страница и шрифты
+  // загрузились, доводим до места мгновенно, без второй анимации. Если гость уже
+  // сам начал листать — не трогаем.
+  if (location.hash.length > 1){
+    var hashTarget = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    var userScrolled = false;
+    var markUserScroll = function(){ userScrolled = true; };
+    ['wheel', 'touchstart', 'keydown'].forEach(function(type){
+      window.addEventListener(type, markUserScroll, { passive: true, once: true });
+    });
+    var snapToHash = function(){
+      if (!hashTarget || userScrolled) return;
+      var root = document.documentElement;
+      root.style.scrollBehavior = 'auto';
+      hashTarget.scrollIntoView();
+      root.style.scrollBehavior = '';
+    };
+    var pageLoaded = new Promise(function(resolve){
+      if (document.readyState === 'complete') resolve();
+      else window.addEventListener('load', resolve);
+    });
+    var fontsLoaded = document.fonts ? document.fonts.ready : Promise.resolve();
+    Promise.all([pageLoaded, fontsLoaded]).then(function(){
+      snapToHash();
+      // Страховка: шрифт мог догрузиться чуть позже — поправляем ещё раз
+      setTimeout(snapToHash, 600);
+    });
+  }
 })();
+
+/* логотип с орбитой: при «уменьшить движение» в настройках системы гитара не летает */
+if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('svg.tg-logo').forEach(function (s) { if (s.pauseAnimations) { s.pauseAnimations(); s.setCurrentTime(2.5); } });
+}

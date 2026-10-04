@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Политика конфиденциальности — Триггер Бар</title>
 <meta name="description" content="Политика обработки персональных данных Триггер Бара: какие данные собираются через форму бронирования, как используются и хранятся.">
@@ -22,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Rubik+Distressed&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=73">
+<link rel="stylesheet" href="assets/style.css?v=74-demo">
 <style>
   .legal{ padding:150px 0 100px; }
   .legal__head{ max-width:720px; margin-bottom:56px; }
@@ -47,17 +48,52 @@
 
 <header class="nav">
   <div class="nav__inner">
-    <a href="index.html" class="nav__brand">
-      <img src="assets/logo-badge.webp" alt="Триггер Бар" class="nav__logo">
+    <a href="/" class="nav__brand">
+      <svg class="nav__logo tg-logo" viewBox="-60 -10 760 380" role="img" aria-label="Триггер Бар">
+  <defs>
+    <symbol id="tg-guitar-n" viewBox="0 0 200 200"><g transform="translate(7 -7) rotate(45 100 100) translate(100 100) scale(0.82) translate(-100 -100)">
+<g stroke="#C21C96" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M88 112 C82 100 72 92 63 98 C55 104 60 118 58 128 C56 140 44 148 46 164 C48 182 70 190 100 188 C130 190 152 182 154 164 C156 148 144 140 142 128 C140 118 147 104 139 98 C130 92 118 100 112 112"/>
+<path d="M94 112 L94 28 M106 28 L106 112"/>
+<path d="M92 28 L92 8 Q100 2 108 8 L108 28 Z"/>
+</g>
+<g stroke="#D89A1E" stroke-width="4" stroke-linecap="round">
+<line x1="86" y1="130" x2="114" y2="130"/>
+<line x1="86" y1="146" x2="114" y2="146"/>
+<line x1="88" y1="166" x2="112" y2="166"/>
+</g>
+<circle cx="88" cy="13" r="2.6" fill="#D89A1E"/><circle cx="88" cy="22" r="2.6" fill="#D89A1E"/><circle cx="112" cy="13" r="2.6" fill="#D89A1E"/><circle cx="112" cy="22" r="2.6" fill="#D89A1E"/>
+<circle cx="132" cy="162" r="4" fill="#D89A1E"/>
+<circle cx="124" cy="176" r="4" fill="#D89A1E"/>
+</g></symbol>
+  </defs>
+  <ellipse cx="320" cy="178" rx="320" ry="115" transform="rotate(-9 320 178)" fill="none" stroke="#c21c96" stroke-width="2.5" class="orbit"/>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar" opacity="0">
+      <use href="#tg-guitar-n" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="word" x="320" y="160" text-anchor="middle" dominant-baseline="central">ТРИГГЕР</text>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar">
+      <use href="#tg-guitar-n" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="tag" x="320" y="230" text-anchor="middle">РОК-БАР</text>
+</svg>
     </a>
     <nav class="nav__links">
-      <a href="index.html#about">О баре</a>
-      <a href="index.html#afisha">Афиша</a>
+      <a href="/#about">О баре</a>
+      <a href="/#afisha">Афиша</a>
       <a href="menu.html">Меню бара</a>
       <a href="rider.html">Технический райдер</a>
         <a href="triggerovchane.html">Триггеровчане</a>
-      <a href="index.html#contacts">Контакты</a>
-      <a href="index.html#booking" class="btn btn--sm">Забронировать стол</a>
+      <a href="/#contacts">Контакты</a>
+      <a href="/#booking" class="btn btn--sm">Забронировать стол</a>
     </nav>
     <button type="button" class="nav__menu-btn">Меню</button>
   </div>
@@ -68,20 +104,32 @@
     <div class="legal__head">
       <span class="eyebrow">Персональные данные</span>
       <h1>Политика конфиденциальности</h1>
-      <p>Как Триггер Бар обрабатывает данные, которые вы оставляете через форму бронирования стола на этом сайте.</p>
+      <p>Как Триггер Бар обрабатывает данные, которые вы оставляете через формы на этом сайте: бронирования стола и обратной связи.</p>
     </div>
     <div class="legal__body">
+      <h2>Кто обрабатывает данные</h2>
+      <p>Оператор персональных данных — Общество с ограниченной ответственностью «ДВЛ» (ООО «ДВЛ»), которое управляет Триггер Баром.</p>
+      <ul>
+        <li>ИНН 9724059164, КПП 772401001</li>
+        <li>ОГРН 1217700472329</li>
+        <li>Юридический адрес: 115230, г. Москва, Варшавское шоссе, д. 45, этаж 2, помещение 1/2</li>
+        <li>Генеральный директор: Сумин Дмитрий Валериевич</li>
+      </ul>
+
       <h2>Какие данные мы собираем</h2>
-      <p>При заполнении формы бронирования вы указываете: имя, номер телефона, количество гостей и удобный способ связи (телефон, Телеграм, Ватсап или Макс).</p>
+      <ul>
+        <li>В форме бронирования стола: имя, номер телефона, количество гостей и удобный способ связи (телефон, Телеграм, Ватсап или Макс).</li>
+        <li>В форме обратной связи: имя, номер телефона или адрес электронной почты и текст вашего сообщения.</li>
+      </ul>
 
       <h2>Зачем нужны эти данные</h2>
-      <p>Мы используем их только для того, чтобы связаться с вами, подтвердить бронь стола и учесть пожелания к визиту (например, если вы пришли на конкретное мероприятие или с банкетом).</p>
+      <p>Мы используем их только для того, чтобы связаться с вами: подтвердить бронь стола и учесть пожелания к визиту (например, если вы пришли на конкретное мероприятие или с банкетом) или ответить на ваш вопрос либо предложение из формы обратной связи.</p>
 
       <h2>Как мы храним и передаём данные</h2>
       <ul>
-        <li>Данные из формы поступают напрямую сотрудникам бара и не передаются третьим лицам, кроме случаев, прямо предусмотренных законом.</li>
+        <li>Данные из форм поступают напрямую сотрудникам бара и не передаются третьим лицам, кроме случаев, прямо предусмотренных законом.</li>
         <li>Мы не используем ваши контакты для рекламных рассылок без отдельного согласия.</li>
-        <li>Данные хранятся не дольше, чем это необходимо для обработки брони и ответа на связанные вопросы.</li>
+        <li>Данные хранятся не дольше, чем это необходимо для обработки брони или ответа на ваше обращение.</li>
       </ul>
 
       <h2>Ваши права</h2>
@@ -90,7 +138,7 @@
       <h2>Контакты</h2>
       <p>Триггер Бар, Варшавское шоссе, 45, м. Нагатинская. Телефон: <a href="tel:+79268284232">+7 926 828-42-32</a>.</p>
     </div>
-    <a href="index.html#booking" class="btn legal__back">Вернуться к брони</a>
+    <a href="/#booking" class="btn legal__back">Вернуться к брони</a>
   </div>
 </main>
 
@@ -98,7 +146,42 @@
   <div class="container">
     <div class="footer__inner">
       <div class="footer__brand">
-        <img src="assets/logo-badge.webp" alt="Триггер Бар" class="footer__logo">
+        <svg class="footer__logo tg-logo" viewBox="-60 -10 760 380" role="img" aria-label="Триггер Бар">
+  <defs>
+    <symbol id="tg-guitar-f" viewBox="0 0 200 200"><g transform="translate(7 -7) rotate(45 100 100) translate(100 100) scale(0.82) translate(-100 -100)">
+<g stroke="#C21C96" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M88 112 C82 100 72 92 63 98 C55 104 60 118 58 128 C56 140 44 148 46 164 C48 182 70 190 100 188 C130 190 152 182 154 164 C156 148 144 140 142 128 C140 118 147 104 139 98 C130 92 118 100 112 112"/>
+<path d="M94 112 L94 28 M106 28 L106 112"/>
+<path d="M92 28 L92 8 Q100 2 108 8 L108 28 Z"/>
+</g>
+<g stroke="#D89A1E" stroke-width="4" stroke-linecap="round">
+<line x1="86" y1="130" x2="114" y2="130"/>
+<line x1="86" y1="146" x2="114" y2="146"/>
+<line x1="88" y1="166" x2="112" y2="166"/>
+</g>
+<circle cx="88" cy="13" r="2.6" fill="#D89A1E"/><circle cx="88" cy="22" r="2.6" fill="#D89A1E"/><circle cx="112" cy="13" r="2.6" fill="#D89A1E"/><circle cx="112" cy="22" r="2.6" fill="#D89A1E"/>
+<circle cx="132" cy="162" r="4" fill="#D89A1E"/>
+<circle cx="124" cy="176" r="4" fill="#D89A1E"/>
+</g></symbol>
+  </defs>
+  <ellipse cx="320" cy="178" rx="320" ry="115" transform="rotate(-9 320 178)" fill="none" stroke="#c21c96" stroke-width="2.5" class="orbit"/>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar" opacity="0">
+      <use href="#tg-guitar-f" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="word" x="320" y="160" text-anchor="middle" dominant-baseline="central">ТРИГГЕР</text>
+  <g transform="rotate(-9 320 178)">
+    <g class="guitar">
+      <use href="#tg-guitar-f" x="-59" y="-59" width="118" height="118" transform="rotate(9)"/>
+      <animateMotion dur="10s" repeatCount="indefinite" path="M0 178 A320 115 0 0 0 640 178 A320 115 0 0 0 0 178"/>
+      <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="10s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  <text class="tag" x="320" y="230" text-anchor="middle">РОК-БАР</text>
+</svg>
       </div>
       <div class="footer__col">
         <h4>Контакты</h4>
@@ -108,15 +191,15 @@
       </div>
       <div class="footer__col">
         <h4>Навигация</h4>
-        <a href="index.html#about">О баре</a>
-        <a href="index.html#afisha">Афиша</a>
+        <a href="/#about">О баре</a>
+        <a href="/#afisha">Афиша</a>
         <a href="menu.html">Меню бара</a>
         <a href="rider.html">Технический райдер</a>
         <a href="triggerovchane.html">Триггеровчане</a>
       </div>
       <div class="footer__col">
         <h4>Бронь</h4>
-        <a href="index.html#booking">Забронировать стол</a>
+        <a href="/#booking">Забронировать стол</a>
       </div>
     </div>
     <div class="footer__bottom">
@@ -127,6 +210,6 @@
   </div>
 </footer>
 
-<script src="assets/script.js"></script>
+<script src="assets/script.js?v=3-demo"></script>
 </body>
 </html>
